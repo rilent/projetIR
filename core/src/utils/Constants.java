@@ -30,16 +30,16 @@ public class Constants {
 		//valeur alien petit
 		public static final float VALEUR_ALIEN_ROUGE= 5000.0f;
 		
-		//nombre de colonne maximal pour la génération d'alien
+		//nombre de colonne maximal pour la gï¿½nï¿½ration d'alien
 		public static final float MAXIMUM_COLONNE_ALIEN = 7.0f;
 		
-		//nombre de ligne maximal pour l a génération d'alien
+		//nombre de ligne maximal pour l a gï¿½nï¿½ration d'alien
 		public static final float MAXIMUM_LIGNE_ALIEN = 5.0f;
 		
-		//nombre de colonne minimum pour la génération d'alien
+		//nombre de colonne minimum pour la gï¿½nï¿½ration d'alien
 		public static final float MINIMUM_COLONNE_ALIEN = 4.0f;
 		
-		//nombre de ligne minimum pour la génération d'alien
+		//nombre de ligne minimum pour la gï¿½nï¿½ration d'alien
 		public static final float MINIMUM_LIGNE_ALIEN = 3.0f;
 		
 		//taille texture alien
@@ -74,7 +74,7 @@ public class Constants {
 		//taille d'un missile
 		public static final float LARGEUR_MISSILE = 8.0f;
 		
-		//durée entre chaque vague de missile
+		//durï¿½e entre chaque vague de missile
 		public static final float DELAI_MISSILE = 24.0f;
 		
 		//hauteur minimum d'un arbre
@@ -84,5 +84,5 @@ public class Constants {
 		public static final int HAUTEUR_MAX_ARBRE = 5;
 		
 		//nombre de render max (pour affichage d'un nouveau missile)
-		public static final int MAX_RENDER = 20;
+		public static final int MAX_RENDER = 40;
 }
