@@ -1,0 +1,166 @@
+
+spaceInvaders.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+ce
+  rotate: false
+  xy: 1, 27
+  size: 88, 98
+  orig: 88, 98
+  offset: 0, 0
+  index: -1
+pa
+  rotate: false
+  xy: 91, 27
+  size: 88, 98
+  orig: 88, 98
+  offset: 0, 0
+  index: -1
+s
+  rotate: false
+  xy: 181, 32
+  size: 44, 93
+  orig: 44, 93
+  offset: 0, 0
+  index: -1
+alienrouge3264
+  rotate: false
+  xy: 227, 93
+  size: 64, 32
+  orig: 64, 32
+  offset: 0, 0
+  index: -1
+n
+  rotate: false
+  xy: 227, 42
+  size: 30, 49
+  orig: 30, 49
+  offset: 0, 0
+  index: -1
+v
+  rotate: false
+  xy: 259, 42
+  size: 30, 49
+  orig: 30, 49
+  offset: 0, 0
+  index: -1
+aliencostaud32
+  rotate: false
+  xy: 293, 93
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+a
+  rotate: false
+  xy: 291, 42
+  size: 25, 49
+  orig: 25, 49
+  offset: 0, 0
+  index: -1
+alienmoyen32
+  rotate: false
+  xy: 327, 93
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+e
+  rotate: false
+  xy: 318, 42
+  size: 25, 49
+  orig: 25, 49
+  offset: 0, 0
+  index: -1
+bloc232
+  rotate: false
+  xy: 361, 93
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+r
+  rotate: false
+  xy: 345, 42
+  size: 25, 49
+  orig: 25, 49
+  offset: 0, 0
+  index: -1
+d
+  rotate: false
+  xy: 372, 42
+  size: 24, 49
+  orig: 24, 49
+  offset: 0, 0
+  index: -1
+bloc32
+  rotate: false
+  xy: 395, 93
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+spetit
+  rotate: false
+  xy: 398, 42
+  size: 24, 49
+  orig: 24, 49
+  offset: 0, 0
+  index: -1
+tank32
+  rotate: false
+  xy: 429, 93
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+i
+  rotate: false
+  xy: 424, 42
+  size: 10, 49
+  orig: 10, 49
+  offset: 0, 0
+  index: -1
+Bombalien-824
+  rotate: false
+  xy: 1, 1
+  size: 8, 24
+  orig: 8, 24
+  offset: 0, 0
+  index: -1
+laserrouge
+  rotate: false
+  xy: 463, 101
+  size: 8, 24
+  orig: 8, 24
+  offset: 0, 0
+  index: -1
+laservert
+  rotate: false
+  xy: 436, 67
+  size: 8, 24
+  orig: 8, 24
+  offset: 0, 0
+  index: -1
+tankmissile-824
+  rotate: false
+  xy: 11, 1
+  size: 8, 24
+  orig: 8, 24
+  offset: 0, 0
+  index: -1
+explosionrouge
+  rotate: false
+  xy: 473, 112
+  size: 13, 13
+  orig: 13, 13
+  offset: 0, 0
+  index: -1
+explosionvert
+  rotate: false
+  xy: 446, 78
+  size: 13, 13
+  orig: 13, 13
+  offset: 0, 0
+  index: -1
