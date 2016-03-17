@@ -32,7 +32,7 @@ public class WorldControllerMano extends InputAdapter{
     private World world;
     private float sauvegardeDescente;
     private long vitesseDuNiveau = 100000;         //100000
-    private long gestionVitesseChute;
+    private long gestionVitesseChute; //gerer vitesse chute
     private float vitesseTank; //vitesse du tank
     private ArrayList<Integer> indiceDesColonnesQuiTire;
     public int premierpassage = 0;
