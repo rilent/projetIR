@@ -11,9 +11,9 @@ public enum EComparaisonFeatures {
 	
 		TankxSupAlienPlusProchex("TankxSupAlienPlusProchex", "tk.x>A.x"),
 		TankxSupProtectionPlusProche("TankxSupProtectionPlusProche", "Tk.x>P.x"),
-		TankxSupMissilePlusProche("TankxSupMissilePlusProche","Tk.x>M.x");
+		TankxSupMissilePlusProche("TankxSupMissilePlusProche","Tk.x>M.x"),
 	
-	
+		AlienLePlusBasEstAuDessusDeLaMoitieDuTerrain("AlienLePlusBasEstAuDessusDeLaMoitieDuTerrain", "A<moit");
 		
 		private String name = "";
 		private String affichage = "";

@@ -16,6 +16,7 @@ import model.Tank;
 import model.World;
 import utils.Constants;
 import utils.EActionTank;
+import arbres.Fonctions;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputAdapter;
@@ -87,12 +88,15 @@ public boolean isGameOver()
     
     
     public void update(float deltaTime) {
-            
+    	
+    	boolean haha = false;
+        haha = Fonctions.AlienLePlusBasEstAuDessusDeLaMoitieDuTerrain(world);
+        
 	    	//pour faire render par render
-	    	/*Scanner reader = new Scanner(System.in);  // Reading from System.in
-	    	System.out.println("Enter a number: ");
-	    	int n = reader.nextInt();
-	    	*/
+	    	//Scanner reader = new Scanner(System.in);  // Reading from System.in
+	    	//System.out.println("Enter a number: ");
+	    	//int n = reader.nextInt();
+	    	
 	    	EActionTank action = EActionTank.Nothing; // obligé de initialisé
 	    	try {
 				action = world.getTree().decisionTank(world);

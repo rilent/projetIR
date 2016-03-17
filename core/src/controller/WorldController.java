@@ -4,6 +4,8 @@ package controller;
 
 import java.util.ArrayList;
 
+import arbres.Fonctions;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputAdapter;
@@ -85,8 +87,7 @@ public class WorldController extends InputAdapter {
         
         
         public void update(float deltaTime) {
-                
-                //handleDebugInput(deltaTime);
+        		//handleDebugInput(deltaTime);
         		mouvementMissile();	
                 if(isGameOver())
                 {

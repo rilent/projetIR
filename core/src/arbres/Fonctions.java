@@ -1,5 +1,6 @@
 package arbres;
 
+import utils.Constants;
 import model.Alien;
 import model.Bloc;
 import model.GameElement;
@@ -30,6 +31,7 @@ public class Fonctions implements ElementNoeud{
 
 	public static boolean TankxSupAlienPlusProchex(World w)
 	{
+		
     	Alien lePlusProche = null;
     	//Alien lePlusProche = getListeAlien().get(0);
     	//double plusPetiteDistance = distanceEntreDeuxGameElement(getTank(), lePlusProche);
@@ -48,9 +50,7 @@ public class Fonctions implements ElementNoeud{
     	}
     	
     	if(lePlusProche == null)
-    	{
     		return true;
-    	}
     	
     	return w.getTank().getPosition().x > lePlusProche.getPosition().x;        
 	}
@@ -120,6 +120,30 @@ public class Fonctions implements ElementNoeud{
     {
     	return Math.sqrt( Math.pow(g2.getPosition().x - g1.getPosition().x, 2) + Math.pow(g2.getPosition().y - g1.getPosition().y, 2) );
     }
+	
+	
+	public static boolean AlienLePlusBasEstAuDessusDeLaMoitieDuTerrain(World w)
+	{
+		boolean reponse = true ;
+		
+		double moitie = (Constants.VIEWPORT_GUI_HEIGHT/2);
+		double distanceTest = 0;
+		if (!(w.getListeAlien().size()==0)) {
+        	for(Alien m : w.getListeAlien())
+        	{
+        		distanceTest = m.getPosition().x - moitie;
+        		if (distanceTest<0) {
+        			reponse = false;
+        		}
+        	}  
+    	}
+		
+		System.out.println("distance par rapport a la moitie = " + (distanceTest+ moitie) + " - " + moitie + " = " +distanceTest);
+		
+		return reponse;
+	}
+	
+	
 
 	@Override
 	public String toStringMethod() {
