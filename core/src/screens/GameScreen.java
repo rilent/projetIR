@@ -27,7 +27,7 @@ public class GameScreen extends AbstractGameScreen{
 	private World world;
 	private OrthographicCamera camera;
 	int compteur;
-	BinaryTree tree; // Tree of the current game, reminder : any games got a different tree
+
 	
 	public GameScreen(Game game) {
 		super(game);
@@ -39,19 +39,8 @@ public class GameScreen extends AbstractGameScreen{
 		worldRenderer = new WorldRenderer(world);
 		worldController = new WorldControllerMano(world);
 		camera = new OrthographicCamera();
-		
-		//génération de l'arbre
-		tree = BinaryTree.generationTreeAleatoire();
-		
-		//affichage dans les deux modes de l'arbre :
-		TreePrinter.print(tree.root);
-		
-		try {
-			tree.root.printTree(new OutputStreamWriter(System.out));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+	}	
+
 
 	@Override
 	public void render(float deltaTime) {
@@ -102,6 +91,10 @@ public class GameScreen extends AbstractGameScreen{
 		// TODO Auto-generated method stub
 		
 	}
+	
+	
+	
+	
 
 	
 	

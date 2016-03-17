@@ -28,7 +28,7 @@ public class Fonctions implements ElementNoeud{
 	}
 
 
-	public boolean TankxSupAlienPlusProchex(World w)
+	public static boolean TankxSupAlienPlusProchex(World w)
 	{
     	Alien lePlusProche = null;
     	//Alien lePlusProche = getListeAlien().get(0);
@@ -57,7 +57,7 @@ public class Fonctions implements ElementNoeud{
 	
 	
 	
-	public boolean TankxSupProtectionPlusProche(World w)
+	public static boolean TankxSupProtectionPlusProche(World w)
 	{
     	Bloc lePlusProche = null;
     	//Bloc lePlusProche = getListeBloc().get(0);
@@ -79,7 +79,7 @@ public class Fonctions implements ElementNoeud{
     }
 	
 	
-	public boolean TankxSupMissilePlusProche(World w)
+	public static boolean TankxSupMissilePlusProche(World w)
 	{
     	
     	Missile lePlusProche = null;
@@ -116,7 +116,7 @@ public class Fonctions implements ElementNoeud{
     	return w.getTank().getPosition().x > lePlusProche.getPosition().x;        	
     }
 
-	public double distanceEntreDeuxGameElement(GameElement g1, GameElement g2)
+	public static double distanceEntreDeuxGameElement(GameElement g1, GameElement g2)
     {
     	return Math.sqrt( Math.pow(g2.getPosition().x - g1.getPosition().x, 2) + Math.pow(g2.getPosition().y - g1.getPosition().y, 2) );
     }

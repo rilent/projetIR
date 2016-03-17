@@ -5,12 +5,16 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.Random;
 
 import utils.Constants;
 
 import com.badlogic.gdx.math.Vector2;
+
+import arbres.BinaryTree;
+import arbres.TreePrinter;
 
 public class World {
 
@@ -29,14 +33,15 @@ public class World {
         Tank tank;
         int scoreTemps;
         boolean partieTermine;
-        int cpt_render = 0; // compter le nombre de fois qu'un render est appelé
+        int cpt_render = 0; // compter le nombre de fois qu'un render est appelï¿½
         boolean AI; //sauvegarde seed
         String directionDepartAlien; //sauvegarde dans le seed
         String directionAlienCourante;
         String directionAlienSauvegarde;
         private ArrayList<Integer> ordonnancementDeQuiTire;
         private float delaiSwitchColonnes = 2;
-        private boolean premierPassage = false; //pour génerer le seed la premiere fois si c'est AI
+        private boolean premierPassage = false; //pour gï¿½nerer le seed la premiere fois si c'est AI
+    	BinaryTree tree; // Tree of the current game, reminder : any games got a different tree
         
         private boolean peutTirer = true;
         
@@ -48,6 +53,18 @@ public class World {
 
         public World(Joueur j) {
         	
+    		//gÃ©nÃ©ration de l'arbre
+    		tree = BinaryTree.generationTreeAleatoire();
+    		
+    		//affichage dans les deux modes de l'arbre :
+    		TreePrinter.print(tree.root);
+    		
+    		try {
+    			tree.root.printTree(new OutputStreamWriter(System.out));
+    		} catch (IOException e) {
+    			e.printStackTrace();
+    		}
+
         	
             tank = j.getT();
             listeBloc = new ArrayList<Bloc>();
@@ -285,6 +302,8 @@ public class World {
             return sortie;
         }
        
+        //sauvegarde si jamais mais normalement tout est dans fonctions maintenant
+        /*
         
         public double distanceEntreDeuxGameElement(GameElement g1, GameElement g2)
         {
@@ -337,12 +356,12 @@ public class World {
         	
         	if (getListeMissile().size()==0)
         		return null;
-        	/*
-        	if (getListeMissile().get(0) instanceof MissileTank)
-        		lePlusProche = getListeMissile().get(1);
-        	else
-        		lePlusProche = getListeMissile().get(0);
-        	*/
+        	
+        	//if (getListeMissile().get(0) instanceof MissileTank)
+        	//	lePlusProche = getListeMissile().get(1);
+        	//else
+        	//	lePlusProche = getListeMissile().get(0);
+        	
         	double plusPetiteDistance = 1000000;
         	
         	//double plusPetiteDistance = distanceEntreDeuxGameElement(getTank(), lePlusProche);
@@ -367,7 +386,7 @@ public class World {
         	return lePlusProche;        	
         }
         
-        
+        */
         
         public void generationAlien(int l, int c)
         {    
@@ -523,7 +542,7 @@ public class World {
                         listeBloc.add(b1);
                         completationBloc(b1);
                         
-                        //bloc à gauche
+                        //bloc ï¿½ gauche
                         Bloc b2 = new Bloc(new Vector2(Constants.VIEWPORT_GUI_WIDTH / 4 - Constants.TAILLE_BLOC,Constants.HAUTEUR_BLOC));
                         listeBloc.add(b2);
                         completationBloc(b2);
@@ -547,7 +566,7 @@ public class World {
                         listeBloc.add(b1);
                         completationBloc(b1);
                         
-                        //bloc à gauche
+                        //bloc ï¿½ gauche
                         Bloc b2 = new Bloc(new Vector2(Constants.VIEWPORT_GUI_WIDTH *2 / 5 - Constants.TAILLE_BLOC,Constants.HAUTEUR_BLOC));
                         listeBloc.add(b2);
                         completationBloc(b2);
@@ -586,13 +605,13 @@ public class World {
         
         
         
-        //permets de rajouter les 3 blocs autour d'un bloc crée 
-        //(en dessous, à droite de lui, en diagonale à droite)
+        //permets de rajouter les 3 blocs autour d'un bloc crï¿½e 
+        //(en dessous, ï¿½ droite de lui, en diagonale ï¿½ droite)
         public void completationBloc(Bloc b) 
         {
-                listeBloc.add(new Bloc(new Vector2(b.gethitBox().x + 32,b.gethitBox().y))); // le bloc à droite de lui
+                listeBloc.add(new Bloc(new Vector2(b.gethitBox().x + 32,b.gethitBox().y))); // le bloc ï¿½ droite de lui
                 listeBloc.add(new Bloc(new Vector2(b.gethitBox().x,b.gethitBox().y - 32))); //le bloc en dessous de lui
-                listeBloc.add(new Bloc(new Vector2(b.gethitBox().x + 32,b.gethitBox().y - 32))); //le bloc en diagonale à droite
+                listeBloc.add(new Bloc(new Vector2(b.gethitBox().x + 32,b.gethitBox().y - 32))); //le bloc en diagonale ï¿½ droite
         }
         
 
@@ -719,6 +738,14 @@ public class World {
 
 		public void setCpt_render(int cpt_render) {
 			this.cpt_render = cpt_render;
+		}
+
+		public BinaryTree getTree() {
+			return tree;
+		}
+
+		public void setTree(BinaryTree tree) {
+			this.tree = tree;
 		}
 
         

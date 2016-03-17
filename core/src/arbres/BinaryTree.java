@@ -1,7 +1,11 @@
 package arbres;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.Random;
 
+import model.World;
 import utils.Constants;
 import utils.EActionTank;
 
@@ -41,7 +45,7 @@ public class BinaryTree
     
     public void ajoutAleatoireNoeud(int hauteur, Node root)
     {
-    	//si on a dépassé la hauteur, on force un noeud ternaire
+    	//si on a dï¿½passï¿½ la hauteur, on force un noeud ternaire
     	if(hauteur==Constants.HAUTEUR_MAX_ARBRE)
     	{
     		//fils gauche
@@ -112,4 +116,47 @@ public class BinaryTree
 		BinaryTree.root = root;
 	}
     
+	
+	// va parcourir l'arbre et donner une dÃ©cision au tank par rapport au parcours effectuÃ© de l'arbre
+	public EActionTank decisionTank(World w) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException
+	{
+		
+		Node noeudEnCours = BinaryTree.root;
+		
+		while(noeudEnCours.getKey() instanceof Fonctions)
+		{
+			
+			System.out.println(noeudEnCours.getKey().toStringAffichage());
+			Method method = null;
+			boolean test = false;
+			try {
+				method = noeudEnCours.getKey().getClass().getMethod(noeudEnCours.getKey().toStringMethod(),World.class);
+			} catch (NoSuchMethodException e) {
+				e.printStackTrace();
+			} catch (SecurityException e) {
+				e.printStackTrace();
+			}
+
+			test = (Boolean) method.invoke(noeudEnCours.getKey(),w);
+			System.out.println(test);
+			//si le resultat de la fonction est vrai, on part dans le fils droit
+			if(test == true)
+			{
+				noeudEnCours = noeudEnCours.getRight();
+			}
+			//si le resultat de la fonction est faux, on part dans le fils gauche
+			else
+			{
+				noeudEnCours = noeudEnCours.getLeft();
+			}	
+			
+		}
+		
+		ElementTernaire elem = (ElementTernaire) noeudEnCours.getKey();
+		return elem.action;
+		
+	}
+	
+	
+	
 }

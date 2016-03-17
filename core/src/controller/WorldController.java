@@ -90,7 +90,7 @@ public class WorldController extends InputAdapter {
         		mouvementMissile();	
                 if(isGameOver())
                 {
-                    //retour menu ou nouvelle génération
+                    //retour menu ou nouvelle gï¿½nï¿½ration
             		deltaTime = 0;
                 }
                 else
@@ -108,7 +108,7 @@ public class WorldController extends InputAdapter {
                 testCollisionMissile();
                 eliminationMissileHorsLimite();
                 
-                //verifie a chaque instant si une colonne est vide, afin de faire le ménage
+                //verifie a chaque instant si une colonne est vide, afin de faire le mï¿½nage
             	for(int i = 1; i<world.getNombreDeColonnes()+1; i++)
             	{
             		testColonneVide(i);
@@ -153,6 +153,9 @@ public class WorldController extends InputAdapter {
                 
                 System.out.println("position          tank : "+this.world.getTank().getPosition());
                 
+                
+                
+                /*
                 Alien alienLeplusproche = this.world.AlienLePlusProcheDuTank();
                 System.out.println("alien le plus   proche : "+ alienLeplusproche.getPosition());
                 
@@ -167,16 +170,17 @@ public class WorldController extends InputAdapter {
                 	System.out.println("pas de bloc");
                 else
                 	System.out.println("bloc le   plus proche  : "+ blocLeplusproche.getPosition());
+                */
                 
+
                 
-                //gerer si une colonne disparait, on doit nettoyer le ordonnancement;
         }
                 
         
         //verifie si une colonne est vide et retire la colonne de l'ordonnancement
         private void testColonneVide(int c)
         {
-        	if(!colonneDejaDetruite.contains(c)) // si pas déja su comme supprimé
+        	if(!colonneDejaDetruite.contains(c)) // si pas dï¿½ja su comme supprimï¿½
         	{
 	        	ArrayList<Integer> elemASupr = new ArrayList<Integer>();
 	        	boolean trouve = false;
@@ -206,7 +210,7 @@ public class WorldController extends InputAdapter {
         	
         }
         
-        //gère le tire des aliens
+        //gï¿½re le tire des aliens
         private void gestionTirMissileDesAliens()
         {
 
@@ -330,7 +334,7 @@ public class WorldController extends InputAdapter {
         
         public void replacementTank()
         {
-        	//si en dehors de l ecran à droite
+        	//si en dehors de l ecran ï¿½ droite
         	if(world.getTank().getPosition().x > Constants.VIEWPORT_GUI_WIDTH - Constants.TAILLE_TANK)
         	{
         		world.getTank().setPosition(new Vector2(Constants.VIEWPORT_GUI_WIDTH - Constants.TAILLE_TANK,world.getTank().getPosition().y));
@@ -353,7 +357,7 @@ public class WorldController extends InputAdapter {
     		{    	
 				for(GameElement ge : world.getListeGameElement())
 		        {
-					//si missile pas égal à lui meme
+					//si missile pas ï¿½gal ï¿½ lui meme
 	        		if(!m.equals(ge))
 	        		{
 	        			//si on a une collision, supprime ge et m
@@ -437,7 +441,7 @@ public class WorldController extends InputAdapter {
         
         
         
-        //descente des missiles alien et monté des missile du tank
+        //descente des missiles alien et montï¿½ des missile du tank
         public void mouvementMissile()
         {
         	for(Missile m : world.getListeMissile())

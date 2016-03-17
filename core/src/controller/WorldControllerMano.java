@@ -1,5 +1,6 @@
 package controller;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -12,6 +13,7 @@ import model.MissileTank;
 import model.Tank;
 import model.World;
 import utils.Constants;
+import utils.EActionTank;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputAdapter;
@@ -84,29 +86,42 @@ public boolean isGameOver()
     
     public void update(float deltaTime) {
             
-	    	
-	    	Scanner reader = new Scanner(System.in);  // Reading from System.in
+	    	//pour faire render par render
+	    	/*Scanner reader = new Scanner(System.in);  // Reading from System.in
 	    	System.out.println("Enter a number: ");
 	    	int n = reader.nextInt();
-    	
+	    	*/
+	    	EActionTank action = EActionTank.Nothing; // obligÃ© de initialisÃ©
+	    	try {
+				action = world.getTree().decisionTank(world);
+			} catch (IllegalAccessException e) {
+				e.printStackTrace();
+			} catch (IllegalArgumentException e) {
+				e.printStackTrace();
+			} catch (InvocationTargetException e) {
+				e.printStackTrace();
+			}
 	    	
 	    	
+	    	System.out.println("L'action du tank choisi est : "+action.toString());
+	    	
+	    	//pour ne pas etre deborder de missile
 			if(world.getCpt_render() > Constants.MAX_RENDER)
 			{
 				world.setCpt_render(0);
 			}
 	    	
-    		System.out.println(n);
             //handleDebugInput(deltaTime);
     		mouvementMissile();	
             if(isGameOver())
             {
-                //retour menu ou nouvelle génération
+                //retour menu ou nouvelle gï¿½nï¿½ration
         		deltaTime = 0;
             }
             else
             {
-        		handleInputTank(deltaTime);
+        		//handleInputTank(deltaTime);
+            	handleInputTankAutomatisÃ©(action);
                 if(TimeUtils.nanoTime() - gestionVitesseChute > vitesseDuNiveau)
                 {        mouvementAlien();
                         gestionVitesseChute = TimeUtils.nanoTime();
@@ -119,7 +134,7 @@ public boolean isGameOver()
             testCollisionMissile();
             eliminationMissileHorsLimite();
             
-            //verifie a chaque instant si une colonne est vide, afin de faire le ménage
+            //verifie a chaque instant si une colonne est vide, afin de faire le mï¿½nage
         	for(int i = 1; i<world.getNombreDeColonnes()+1; i++)
         	{
         		testColonneVide(i);
@@ -163,31 +178,14 @@ public boolean isGameOver()
             			
             }
             
-            //System.out.println("position          tank : "+this.world.getTank().getPosition());
-            
-            Alien alienLeplusproche = this.world.AlienLePlusProcheDuTank();
-            //System.out.println("alien le plus   proche : "+ alienLeplusproche.getPosition());
-            
-            Missile missileLeplusproche = this.world.MissileLePlusProcheDuTank();
-            //if (missileLeplusproche==null)
-            //	System.out.println("pas de missile");
-            //else
-            //	System.out.println("missile le plus proche : "+ missileLeplusproche.getPosition());
-            
-            Bloc blocLeplusproche = this.world.BlocLePlusProcheDuTank();
-            //if (blocLeplusproche==null)
-            // 	System.out.println("pas de bloc");
-            //else
-            //	System.out.println("bloc le   plus proche  : "+ blocLeplusproche.getPosition());
-            
-            
+
     }
             
     
     //verifie si une colonne est vide et retire la colonne de l'ordonnancement
     private void testColonneVide(int c)
     {
-    	if(!colonneDejaDetruite.contains(c)) // si pas déja su comme supprimé
+    	if(!colonneDejaDetruite.contains(c)) // si pas dï¿½ja su comme supprimï¿½
     	{
         	ArrayList<Integer> elemASupr = new ArrayList<Integer>();
         	boolean trouve = false;
@@ -217,7 +215,7 @@ public boolean isGameOver()
     	
     }
     
-    //gère le tire des aliens
+    //gï¿½re le tire des aliens
     private void gestionTirMissileDesAliens()
     {
 
@@ -286,6 +284,51 @@ public boolean isGameOver()
     
     
     
+    
+    
+    
+    private void handleInputTankAutomatisÃ©(EActionTank action)
+    {
+		float x, y = 0; // position du tank
+
+		
+		if(action == EActionTank.Shot && (world.isPeutTirer()))
+		{
+			world.setPeutTirer(false);
+			
+			Missile m = new MissileTank(new Vector2 (world.getTank().getPosition().x+(Constants.TAILLE_TANK/2),world.getTank().getPosition().y  + Constants.TAILLE_TANK ));
+			world.getListeGameElement().add(m);
+			world.getListeMissile().add(m);
+		}
+
+    	if(action == EActionTank.Right)
+    	{
+    		if(deplacementPossible("droite"))
+    		{
+               	x= world.getTank().getPosition().x;
+                y= world.getTank().getPosition().y; 
+                world.getTank().setPosition(world.getTank().getPosition().set(x+vitesseTank, y));
+    		}
+        }
+    	if(action == EActionTank.Left)
+    	{
+    		if(deplacementPossible("gauche"))
+    		{
+            	x= world.getTank().getPosition().x;
+                y= world.getTank().getPosition().y; 
+                world.getTank().setPosition(world.getTank().getPosition().set(x-vitesseTank, y));
+    		}
+    	}
+    	
+    	replacementTank();
+    }
+    
+    
+    
+    
+    
+    
+    
     private void handleInputTank(float deltaTime)
     {
 		float x, y = 0; // position du tank
@@ -341,7 +384,7 @@ public boolean isGameOver()
     
     public void replacementTank()
     {
-    	//si en dehors de l ecran à droite
+    	//si en dehors de l ecran ï¿½ droite
     	if(world.getTank().getPosition().x > Constants.VIEWPORT_GUI_WIDTH - Constants.TAILLE_TANK)
     	{
     		world.getTank().setPosition(new Vector2(Constants.VIEWPORT_GUI_WIDTH - Constants.TAILLE_TANK,world.getTank().getPosition().y));
@@ -364,7 +407,7 @@ public boolean isGameOver()
 		{    	
 			for(GameElement ge : world.getListeGameElement())
 	        {
-				//si missile pas égal à lui meme
+				//si missile pas ï¿½gal ï¿½ lui meme
         		if(!m.equals(ge))
         		{
         			//si on a une collision, supprime ge et m
@@ -448,7 +491,7 @@ public boolean isGameOver()
     
     
     
-    //descente des missiles alien et monté des missile du tank
+    //descente des missiles alien et montï¿½ des missile du tank
     public void mouvementMissile()
     {
     	for(Missile m : world.getListeMissile())
