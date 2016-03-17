@@ -142,6 +142,7 @@ public boolean isGameOver()
             
             world.setScorePartie(world.getScorePartie() + 1);
             //if (TimeUtils.nanoTime() - lastMissile > 1000000000)
+            System.out.println(" cpt render : "+ world.getCpt_render());
             if(world.getCpt_render() == 0)
             {
             	
