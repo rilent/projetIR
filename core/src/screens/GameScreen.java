@@ -1,10 +1,7 @@
 package screens;
 
-import model.JoueurAI;
-import model.TankJoueur;
-import model.World;
-import utils.Constants;
-import view.WorldRenderer;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
@@ -13,7 +10,14 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.spaceinvaders.MyGdxspaceinvaders;
 
+import arbres.BinaryTree;
+import arbres.TreePrinter;
 import controller.WorldControllerMano;
+import model.JoueurAI;
+import model.TankJoueur;
+import model.World;
+import utils.Constants;
+import view.WorldRenderer;
 
 public class GameScreen extends AbstractGameScreen{
 	
@@ -23,6 +27,7 @@ public class GameScreen extends AbstractGameScreen{
 	private World world;
 	private OrthographicCamera camera;
 	int compteur;
+	BinaryTree tree; // Tree of the current game, reminder : any games got a different tree
 	
 	public GameScreen(Game game) {
 		super(game);
@@ -34,6 +39,18 @@ public class GameScreen extends AbstractGameScreen{
 		worldRenderer = new WorldRenderer(world);
 		worldController = new WorldControllerMano(world);
 		camera = new OrthographicCamera();
+		
+		//génération de l'arbre
+		tree = BinaryTree.generationTreeAleatoire();
+		
+		//affichage dans les deux modes de l'arbre :
+		TreePrinter.print(tree.root);
+		
+		try {
+			tree.root.printTree(new OutputStreamWriter(System.out));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override

@@ -12,14 +12,9 @@ public class MyGdxspaceinvaders extends Game {
 	
 	private static final String TAG = MyGdxspaceinvaders.class.getName();
 	
-	SpriteBatch batch;
-	Texture img;
-	
 	@Override
 	public void create () {
-		/*batch = new SpriteBatch();
-		img = new Texture("badlogic.jpg");
-		*/
+
 		Gdx.app.setLogLevel(Application.LOG_DEBUG);
 		
 		

@@ -7,11 +7,11 @@ import utils.EActionTank;
 
 public class BinaryTree
 {
-    static Node root;
+    public static Node root;
 
     public BinaryTree(ElementNoeud data)
     {
-        root = new Node(data);
+        setRoot(new Node(data));
     }
 
     public void add(Node parent,Node child, String orientation)
@@ -34,7 +34,7 @@ public class BinaryTree
     	//creation racine <- fonction
     	BinaryTree b = new BinaryTree((new Fonctions(EComparaisonFeatures.values()[nombreAleatoire])));
 
-    	b.ajoutAleatoireNoeud(1, root);
+    	b.ajoutAleatoireNoeud(1, getRoot());
     	
     	return b;
     }
@@ -103,5 +103,13 @@ public class BinaryTree
 		int nombreAleatoire = rand.nextInt(max);
 		return nombreAleatoire;
     }
+
+	public static Node getRoot() {
+		return root;
+	}
+
+	public static void setRoot(Node root) {
+		BinaryTree.root = root;
+	}
     
 }

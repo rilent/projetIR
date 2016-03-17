@@ -163,25 +163,24 @@ public boolean isGameOver()
             			
             }
             
-            System.out.println("position          tank : "+this.world.getTank().getPosition());
+            //System.out.println("position          tank : "+this.world.getTank().getPosition());
             
             Alien alienLeplusproche = this.world.AlienLePlusProcheDuTank();
-            System.out.println("alien le plus   proche : "+ alienLeplusproche.getPosition());
+            //System.out.println("alien le plus   proche : "+ alienLeplusproche.getPosition());
             
             Missile missileLeplusproche = this.world.MissileLePlusProcheDuTank();
-            if (missileLeplusproche==null)
-            	System.out.println("pas de missile");
-            else
-            	System.out.println("missile le plus proche : "+ missileLeplusproche.getPosition());
+            //if (missileLeplusproche==null)
+            //	System.out.println("pas de missile");
+            //else
+            //	System.out.println("missile le plus proche : "+ missileLeplusproche.getPosition());
             
             Bloc blocLeplusproche = this.world.BlocLePlusProcheDuTank();
-            if (blocLeplusproche==null)
-            	System.out.println("pas de bloc");
-            else
-            	System.out.println("bloc le   plus proche  : "+ blocLeplusproche.getPosition());
+            //if (blocLeplusproche==null)
+            // 	System.out.println("pas de bloc");
+            //else
+            //	System.out.println("bloc le   plus proche  : "+ blocLeplusproche.getPosition());
             
             
-            //gerer si une colonne disparait, on doit nettoyer le ordonnancement;
     }
             
     
