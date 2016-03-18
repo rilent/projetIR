@@ -326,7 +326,7 @@ public boolean isGameOver()
                 world.getTank().setPosition(world.getTank().getPosition().set(x-vitesseTank, y));
     		}
     	}
-    	
+    	    	
     	replacementTank();
     }
     
