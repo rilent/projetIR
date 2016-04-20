@@ -48,11 +48,8 @@ public class Fonctions implements ElementNoeud{
         		}
         	}  
     	}
-    	else // si il n'ya plus d'Alien cad partie terminee
-    		return false;
     	
-    	// sert a rien surement
-    	if (lePlusProche == null)
+    	if(lePlusProche == null)
     		return true;
     	
     	return w.getTank().getPosition().x > lePlusProche.getPosition().x;        
@@ -77,18 +74,11 @@ public class Fonctions implements ElementNoeud{
         			lePlusProche= m;
         		}
         	}  
-        	return w.getTank().getPosition().x > lePlusProche.getPosition().x; 
     	}
-<<<<<<< HEAD
     	
     	if(lePlusProche == null)
     		return true;
     	return w.getTank().getPosition().x > lePlusProche.getPosition().x;        	
-=======
-    	else // si il n'y a plus de bloc
-    		return false;
-    		    	       	
->>>>>>> branch 'master' of https://github.com/rilent/projetIR.git
     }
 	
 	
