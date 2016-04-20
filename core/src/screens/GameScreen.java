@@ -26,16 +26,11 @@ public class GameScreen extends AbstractGameScreen{
 	private World world;
 	private OrthographicCamera camera;
 	int compteur;
-	private int instance = 1; //permets de compter le nombre d'individu, on s'arrête à 50
-	//Hashtable<Integer, BinaryTree> population = new Hashtable<Integer, BinaryTree>(); //on stocke chaque individu et son arbre
-	ArrayList<Individu> population = new ArrayList<Individu>(); //on stocke chaque individu et son arbre
 	
 	
 	
-	public GameScreen(MyGdxspaceinvaders game, int instance, ArrayList<Individu> population) {
+	public GameScreen(MyGdxspaceinvaders game) {
 		super(game);
-		this.instance = instance;
-		this.population = population;
 		this.gam =  game;
 		//world = new World(new JoueurHumain(new TankJoueur(new Vector2(Constants.POSITION_DEPART_TANK_X,Constants.POSITION_DEPART_TANK_Y), new Vector2(1,0))));
 		world = new World(new JoueurAI(new TankJoueur(new Vector2(Constants.POSITION_DEPART_TANK_X,Constants.POSITION_DEPART_TANK_Y), new Vector2(1,0))),null);
@@ -62,16 +57,17 @@ public class GameScreen extends AbstractGameScreen{
 		
 		if(world.isPartieTermine() == true)
 		{
-			instance = instance + 1;
-			population.add(new Individu(world.getScorePartie(),world.getTree().root));
+
+			gam.getPopulation().add(new Individu(world.getScorePartie(),world.getTree().root));
+			gam.setCalculNbIndividu(gam.getCalculNbIndividu()+1);
 			
-			if(getInstance() < 6)
+			if(gam.getCalculNbIndividu() < 5)
 			{
-				gam.setScreen(new GameScreen(gam, instance, population));
+				gam.setScreen(new GameScreen(gam));
 			}
 			else
 			{
-				gam.setScreen(new EndingScreen(gam, population));
+				gam.setScreen(new EndingScreen(gam));
 			}
 		}
 		
@@ -80,17 +76,6 @@ public class GameScreen extends AbstractGameScreen{
 	
 	
 	
-	
-
-	public int getInstance() {
-		return instance;
-	}
-
-
-	public void setInstance(int instance) {
-		this.instance = instance;
-	}
-
 
 	@Override
 	public void resize(int width, int height) {

@@ -26,20 +26,28 @@ public class GameScreenPourRepetition extends AbstractGameScreen{
 	private World world;
 	private OrthographicCamera camera;
 	int compteur;
-	private int instance = 0; //permets de compter le nombre d'individu, on s'arrête à 50
-	//Hashtable<Integer, BinaryTree> population = new Hashtable<Integer, BinaryTree>(); //on stocke chaque individu et son arbre
-	ArrayList<Individu> population = new ArrayList<Individu>(); //on stocke chaque individu et son arbre
 	
 	
 	
-	public GameScreenPourRepetition(MyGdxspaceinvaders game, int instance, ArrayList<Individu> population) {
+	public GameScreenPourRepetition(MyGdxspaceinvaders game) {
 		super(game);
-		this.instance = instance;
-		this.population = population;
 		this.gam =  game;
 		
 		//population.get(instance).getTree()
-		world = new World(new JoueurAI(new TankJoueur(new Vector2(Constants.POSITION_DEPART_TANK_X,Constants.POSITION_DEPART_TANK_Y), new Vector2(1,0))),population.get(instance).getTree());
+		
+		if(gam.isPremiereGeneration())
+		{
+			world = new World(new JoueurAI(new TankJoueur(new Vector2(Constants.POSITION_DEPART_TANK_X,Constants.POSITION_DEPART_TANK_Y), new Vector2(1,0))),null);
+		}
+		else if(gam.isEnModeRalenti())
+		{
+			world = new World(new JoueurAI(new TankJoueur(new Vector2(Constants.POSITION_DEPART_TANK_X,Constants.POSITION_DEPART_TANK_Y), new Vector2(1,0))),gam.getIndividuQuonRevoie());
+		}
+		else
+		{
+			world = new World(new JoueurAI(new TankJoueur(new Vector2(Constants.POSITION_DEPART_TANK_X,Constants.POSITION_DEPART_TANK_Y), new Vector2(1,0))),gam.getPopulation().get(gam.getCalculNbIndividu()).getTree());
+		}
+
 		worldRenderer = new WorldRenderer(world);
 		worldController = new WorldControllerMano(world);
 		camera = new OrthographicCamera();
@@ -60,35 +68,42 @@ public class GameScreenPourRepetition extends AbstractGameScreen{
 		
 		if(world.isPartieTermine() == true)
 		{
-
-			population.get(instance).setScore(world.getScorePartie());
-			instance = instance + 1;			
-			if(getInstance() < 5)
+			
+			
+			if(gam.isEnModeRalenti())
 			{
-				gam.setScreen(new GameScreenPourRepetition(gam, instance, population));
+				gam.setScreen(new EndingScreen(gam));
 			}
 			else
 			{
-				gam.setScreen(new EndingScreen(gam, population));
+			
+				if(gam.isPremiereGeneration())
+				{
+					gam.getPopulation().add(new Individu(world.getScorePartie(),world.getTree().root)); //on ajoute l'individu
+				}
+				else
+				{
+					gam.getPopulation().get(gam.getCalculNbIndividu()).setScore(world.getScorePartie()); //on mets à jour son score
+				}
+	
+				gam.setCalculNbIndividu(gam.getCalculNbIndividu()+1);			
+				
+				if(gam.getCalculNbIndividu() < 5)
+				{
+					gam.setScreen(new GameScreenPourRepetition(gam));
+				}
+				else
+				{
+					gam.setScreen(new EndingScreen(gam));
+				}
 			}
-		}
 		
+		}	
 		
 	}
 	
 	
 	
-	
-
-	public int getInstance() {
-		return instance;
-	}
-
-
-	public void setInstance(int instance) {
-		this.instance = instance;
-	}
-
 
 	@Override
 	public void resize(int width, int height) {
