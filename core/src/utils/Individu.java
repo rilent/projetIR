@@ -1,14 +1,14 @@
 package utils;
 
-import arbres.BinaryTree;
+import arbres.Node;
 
 public class Individu {
 
 	private int score;
-	private BinaryTree tree;
+	private Node tree;
 	
 
-	public Individu(int score, BinaryTree tree) {
+	public Individu(int score, Node tree) {
 		super();
 		this.score = score;
 		this.tree = tree;
@@ -20,10 +20,10 @@ public class Individu {
 	public void setScore(int score) {
 		this.score = score;
 	}
-	public BinaryTree getTree() {
+	public Node getTree() {
 		return tree;
 	}
-	public void setTree(BinaryTree tree) {
+	public void setTree(Node tree) {
 		this.tree = tree;
 	}
 

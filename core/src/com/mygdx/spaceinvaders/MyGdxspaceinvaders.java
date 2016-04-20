@@ -22,7 +22,7 @@ public class MyGdxspaceinvaders extends Game {
 		//start game at menu screen
 		
 		
-		setScreen(new GameScreen(this,0,new ArrayList<Individu>()));
+		setScreen(new GameScreen(this,1,new ArrayList<Individu>()));
 		
 	}
 

@@ -30,6 +30,8 @@ public class GameScreen extends AbstractGameScreen{
 	//Hashtable<Integer, BinaryTree> population = new Hashtable<Integer, BinaryTree>(); //on stocke chaque individu et son arbre
 	ArrayList<Individu> population = new ArrayList<Individu>(); //on stocke chaque individu et son arbre
 	
+	
+	
 	public GameScreen(MyGdxspaceinvaders game, int instance, ArrayList<Individu> population) {
 		super(game);
 		this.instance = instance;
@@ -61,9 +63,9 @@ public class GameScreen extends AbstractGameScreen{
 		if(world.isPartieTermine() == true)
 		{
 			instance = instance + 1;
-			population.add(new Individu(world.getScorePartie(),world.getTree()));
+			population.add(new Individu(world.getScorePartie(),world.getTree().root));
 			
-			if(getInstance() < 5)
+			if(getInstance() < 6)
 			{
 				gam.setScreen(new GameScreen(gam, instance, population));
 			}

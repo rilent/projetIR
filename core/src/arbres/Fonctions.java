@@ -75,6 +75,9 @@ public class Fonctions implements ElementNoeud{
         		}
         	}  
     	}
+    	
+    	if(lePlusProche == null)
+    		return true;
     	return w.getTank().getPosition().x > lePlusProche.getPosition().x;        	
     }
 	
@@ -113,6 +116,9 @@ public class Fonctions implements ElementNoeud{
     	//if (plusPetiteDistance == 1000000)
     	//	return null;
     	
+    	if(lePlusProche == null)
+    		return true;
+    	
     	return w.getTank().getPosition().x > lePlusProche.getPosition().x;        	
     }
 
@@ -138,7 +144,7 @@ public class Fonctions implements ElementNoeud{
         	}  
     	}
 		
-		System.out.println("distance par rapport a la moitie = " + (distanceTest+ moitie) + " - " + moitie + " = " +distanceTest);
+		//System.out.println("distance par rapport a la moitie = " + (distanceTest+ moitie) + " - " + moitie + " = " +distanceTest);
 		
 		return reponse;
 	}

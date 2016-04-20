@@ -110,7 +110,7 @@ public boolean isGameOver()
 			}
 	    	
 	    	
-	    	System.out.println("L'action du tank choisi est : "+action.toString());
+	    	//System.out.println("L'action du tank choisi est : "+action.toString());
 	    	
 	    	//pour ne pas etre deborder de missile
 			if(world.getCpt_render() > Constants.MAX_RENDER)
@@ -150,7 +150,7 @@ public boolean isGameOver()
             
             world.setScorePartie(world.getScorePartie() + 1);
             //if (TimeUtils.nanoTime() - lastMissile > 1000000000)
-            System.out.println(" cpt render : "+ world.getCpt_render());
+            //System.out.println(" cpt render : "+ world.getCpt_render());
             if(world.getCpt_render() == 0)
             {
             	

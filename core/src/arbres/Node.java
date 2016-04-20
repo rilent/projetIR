@@ -16,7 +16,13 @@ public class Node implements PrintableNode{
         left = null;
     }
 
-    public void setKey(ElementNoeud key) {
+    public Node(Node n) {
+		key = n.key;
+		right = n.right;
+		left = n.left;
+	}
+
+	public void setKey(ElementNoeud key) {
         this.key = key;
     }
 

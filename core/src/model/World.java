@@ -14,6 +14,7 @@ import utils.Constants;
 import com.badlogic.gdx.math.Vector2;
 
 import arbres.BinaryTree;
+import arbres.Node;
 import arbres.TreePrinter;
 
 public class World {
@@ -41,7 +42,7 @@ public class World {
         private ArrayList<Integer> ordonnancementDeQuiTire;
         private float delaiSwitchColonnes = 2;
         private boolean premierPassage = false; //pour g�nerer le seed la premiere fois si c'est AI
-    	BinaryTree tree; // Tree of the current game, reminder : any games got a different tree
+    	BinaryTree tree = null; // Tree of the current game, reminder : any games got a different tree
         
         private boolean peutTirer = true;
         
@@ -51,7 +52,7 @@ public class World {
                 //restauration(seed);
         }
 
-        public World(Joueur j, BinaryTree b) //si b est null, c'est a dire que l'on en est à la première population
+        public World(Joueur j, Node b) //si b est null, c'est a dire que l'on en est à la première population
         {	
     		//génération de l'arbre
         	if(b == null)
@@ -60,7 +61,7 @@ public class World {
         	}
         	else
         	{
-        		tree = b;
+        		tree = new BinaryTree(b);
         	}
     		//affichage dans les deux modes de l'arbre :
     		TreePrinter.print(tree.root);

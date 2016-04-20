@@ -3,9 +3,18 @@ package screens;
 import java.util.ArrayList;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.mygdx.spaceinvaders.MyGdxspaceinvaders;
-
 
 import arbres.BinaryTree;
 import utils.Individu;
@@ -16,12 +25,57 @@ public class EndingScreen extends AbstractGameScreen{
 		MyGdxspaceinvaders gam;
 		ArrayList<Individu> population;
 		BinaryTree leMeilleur; //le meilleur de la population en cours
-		
+		private SpriteBatch sBatch;
+		private BitmapFont font;
+		Skin skin;
+	    Stage stage;
+	    
 		public EndingScreen (MyGdxspaceinvaders game, ArrayList<Individu> pop) {
 			super(game);
 			gam = game;
 			this.population = pop;
-			
+			sBatch = new SpriteBatch();
+			font = new BitmapFont();
+			font.setColor(Color.WHITE);
+            stage=new Stage();
+            
+            Gdx.input.setInputProcessor(stage);
+            
+            skin = new Skin( Gdx.files.internal( "ui/defaultskin.json" ));
+            Table table = new Table();
+            table.setSize(800,800);
+            
+            final TextButton revoir = new TextButton("Revoir le meileur", skin);
+            table.add(revoir).width(200).height(50);
+            table.row();
+            
+            final TextButton prochainepop = new TextButton("Lancer la population suivante", skin);
+            table.add(prochainepop).width(200).height(50);
+            
+            stage.addActor(table);
+            
+            
+            revoir.addListener(new ClickListener(){
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                revoir.addAction(Actions.fadeOut(0.7f));
+                System.out.println("ET CEST LE RALENTI DU MEILLEUR!!");
+				Gdx.graphics.setVSync(true);
+				gam.setScreen(new GameScreenPourRepetition(gam,0,population));
+                }
+           });
+            
+            
+            prochainepop.addListener(new ClickListener(){
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                prochainepop.addAction(Actions.fadeOut(0.7f));
+                System.out.println("POPULATION SUIVANTE!!");
+
+				gam.setScreen(new GameScreenPourRepetition(gam,0,population));
+                }
+           });
+            
 		}	
 
 
@@ -30,15 +84,24 @@ public class EndingScreen extends AbstractGameScreen{
 
 			Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 			Gdx.gl.glClearColor(0, 0, 0, 0);
-
-
-			if(Gdx.input.isTouched())
-			{
-				System.out.println("touché");
-				Gdx.app.exit();
-				Gdx.
-				gam.setScreen(new GameScreen(gam,0,population));
+			
+			
+			sBatch.begin();
+			
+			font.draw(sBatch,  "Les scores obtenus sont : ", 300, 500);
+			for (int i = 0; i < population.size(); i++) {
+				if(population.get(i).getScore() < 100)
+					font.draw(sBatch,""+i+" : "+String.valueOf(0),50 + i,400-40*i);
+					
+				if(population.get(i).getScore() >100)
+				font.draw(sBatch,""+i+" : "+String.valueOf(population.get(i).getScore()).subSequence(0,String.valueOf(population.get(i).getScore()).length()-2),50 + i,400-40*i);
 			}
+			sBatch.end();
+			
+			
+		      // let the stage act and draw
+		      stage.act(deltaTime);
+		      stage.draw();
 			
 			
 		}

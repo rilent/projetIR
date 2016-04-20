@@ -18,6 +18,14 @@ public class BinaryTree
         setRoot(new Node(data));
     }
 
+    
+    public BinaryTree(Node n)
+    {
+        setRoot(new Node(n));
+    }
+    
+    
+    
     public void add(Node parent,Node child, String orientation)
     {
         if(orientation=="left")
@@ -42,6 +50,8 @@ public class BinaryTree
     	
     	return b;
     }
+    
+    
     
     public void ajoutAleatoireNoeud(int hauteur, Node root)
     {
@@ -126,7 +136,7 @@ public class BinaryTree
 		while(noeudEnCours.getKey() instanceof Fonctions)
 		{
 			
-			System.out.println(noeudEnCours.getKey().toStringAffichage());
+			//System.out.println(noeudEnCours.getKey().toStringAffichage());
 			Method method = null;
 			boolean test = false;
 			try {
@@ -138,7 +148,7 @@ public class BinaryTree
 			}
 
 			test = (Boolean) method.invoke(noeudEnCours.getKey(),w);
-			System.out.println(test);
+			//System.out.println(test);
 			//si le resultat de la fonction est vrai, on part dans le fils droit
 			if(test == true)
 			{
