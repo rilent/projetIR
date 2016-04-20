@@ -85,34 +85,16 @@ public class World {
             listeGameElement = new ArrayList<GameElement>();
             ordonnancementDeQuiTire = new ArrayList<Integer>();
             
+            /*
         	if(j instanceof JoueurHumain || (j instanceof JoueurAI && premierPassage))
         	{
         		initAleatoire(j.getT());
-        		// mettre premierPassage a false car on a maintenant un seed pour les premiers world
-        		//premierPassage = false;
-        		//World w1 = new World(new JoueurAI(new TankJoueur(new Vector2(Constants.POSITION_DEPART_TANK_X,Constants.POSITION_DEPART_TANK_Y), new Vector2(1,0))));				
-        		//w1.initAI(recupererLastSeed());
         	}
         	else
-        	{        		
-        		//direction...
-        		//generationAlien(...)
-        		//generationBloc(...)
-        		//String recup = recupererSeed(numeroSeed)
-        		//ordonnancementDeQuiTire.add(1erevaleur)
-        		
+        	{  */      		
         		this.initAI(recupererLastSeed()); 
-        		//System.out.println(recupererLastSeed());
-        		//System.out.println(recupererLastSeed());
         		
-        		/*
-        		ordonnancementDe100Colonnes(this.getNombreDeColonnes());
-        		generationAlien(this.nombredeLignes,this.nombreDeColonnes);
-        		generationBloc(this.nombredeCubes);
-    	        listeGameElement.addAll(listeMissile);
-        		*/
-        		
-        	}
+        	//}
         	listeGameElement.add(tank);
         	scorePartie = 0;
         }        
@@ -122,14 +104,7 @@ public class World {
         	String delimitation = "[-]";
         	String[] infosLigneSeed = ligneSeed.split(delimitation);
         	// direction_depart-nb_ligne-nb_colonnes-nb_cube
-        	
-        	/*
-        	System.out.println(infosLigneSeed[0]);
-        	System.out.println(infosLigneSeed[1]);
-        	System.out.println(infosLigneSeed[2]);
-        	System.out.println(infosLigneSeed[3]);
-        	*/
-        	
+
         	listeMissileAlien = new ArrayList<MissileAlien>();
             listeAlien = new ArrayList<Alien>();
         	
