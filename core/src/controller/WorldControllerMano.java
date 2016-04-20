@@ -14,6 +14,7 @@ import model.MissileAlien;
 import model.MissileTank;
 import model.Tank;
 import model.World;
+import screens.GameScreen;
 import utils.Constants;
 import utils.EActionTank;
 import arbres.Fonctions;
@@ -123,6 +124,7 @@ public boolean isGameOver()
             {
                 //retour menu ou nouvelle g�n�ration
         		deltaTime = 0;
+        		world.setPartieTermine(true);
             }
             else
             {

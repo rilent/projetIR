@@ -51,11 +51,17 @@ public class World {
                 //restauration(seed);
         }
 
-        public World(Joueur j) {
-        	
+        public World(Joueur j, BinaryTree b) //si b est null, c'est a dire que l'on en est à la première population
+        {	
     		//génération de l'arbre
-    		tree = BinaryTree.generationTreeAleatoire();
-    		
+        	if(b == null)
+        	{
+        		tree = BinaryTree.generationTreeAleatoire();
+        	}
+        	else
+        	{
+        		tree = b;
+        	}
     		//affichage dans les deux modes de l'arbre :
     		TreePrinter.print(tree.root);
     		
