@@ -48,8 +48,11 @@ public class Fonctions implements ElementNoeud{
         		}
         	}  
     	}
+    	else // si il n'ya plus d'Alien cad partie terminee
+    		return false;
     	
-    	if(lePlusProche == null)
+    	// sert a rien surement
+    	if (lePlusProche == null)
     		return true;
     	
     	return w.getTank().getPosition().x > lePlusProche.getPosition().x;        
@@ -74,8 +77,11 @@ public class Fonctions implements ElementNoeud{
         			lePlusProche= m;
         		}
         	}  
+        	return w.getTank().getPosition().x > lePlusProche.getPosition().x; 
     	}
-    	return w.getTank().getPosition().x > lePlusProche.getPosition().x;        	
+    	else // si il n'y a plus de bloc
+    		return false;
+    		    	       	
     }
 	
 	
@@ -138,7 +144,7 @@ public class Fonctions implements ElementNoeud{
         	}  
     	}
 		
-		System.out.println("distance par rapport a la moitie = " + (distanceTest+ moitie) + " - " + moitie + " = " +distanceTest);
+		//System.out.println("distance par rapport a la moitie = " + (distanceTest+ moitie) + " - " + moitie + " = " +distanceTest);
 		
 		return reponse;
 	}
