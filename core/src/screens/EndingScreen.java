@@ -37,7 +37,9 @@ public class EndingScreen extends AbstractGameScreen{
             
             Gdx.input.setInputProcessor(stage);
             
+            gam.getPopulation().get(0).getTree();
 
+            
             //trouve le meilleur de la génération actuelle
             trouveLeMeilleur();
             
@@ -55,8 +57,21 @@ public class EndingScreen extends AbstractGameScreen{
             
             stage.addActor(table);
             
+
+            
+            if(!gam.isEnModeRalenti() && !gam.isPremiereGeneration()) //si on ne vient pas du mode ralenti
+            {
+            	gam.setCalculNbIterationPopulation(gam.getCalculNbIterationPopulation() + 1); //alors on tient les comptes dans les générations
+            }
+            
+            if(!gam.isEnModeRalenti()) //si on ne vient pas du mode ralenti
+            {
+            	gam.meilleurDuTournoi(); //on modifie la g�n�ration pour la prochaine it�ration
+            }
+            
             //on est sure d avoir fait au moins une generation si on arrive ici
             gam.setPremiereGeneration(false);
+            
             
             revoir.addListener(new ClickListener(){
                 @Override
@@ -76,10 +91,6 @@ public class EndingScreen extends AbstractGameScreen{
                 public void clicked(InputEvent event, float x, float y) {
                 prochainepop.addAction(Actions.fadeOut(0.7f));
                 System.out.println("POPULATION SUIVANTE!!");
-                if(!gam.isEnModeRalenti()) //si on ne vient pas du mode ralenti
-                {
-                	gam.setCalculNbIterationPopulation(gam.getCalculNbIterationPopulation() + 1); //alors on tient les comptes dans les générations
-                }
                 gam.setEnModeRalenti(false); //on vire le mode ralenti
                 gam.setCalculNbIndividu(0); //on reset le compteur des individus
                 Gdx.graphics.setVSync(false);

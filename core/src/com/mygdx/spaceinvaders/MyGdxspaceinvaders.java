@@ -1,6 +1,7 @@
 package com.mygdx.spaceinvaders;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Game;
@@ -32,6 +33,13 @@ public class MyGdxspaceinvaders extends Game {
 
 	
 	
+	
+	public Node meilleurDuTournoi()
+	{
+		
+		//
+		return null;
+	}
 	
 
 	public Node getIndividuQuonRevoie() {
