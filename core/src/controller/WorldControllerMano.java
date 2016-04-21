@@ -4,7 +4,6 @@ package controller;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import model.Alien;
 import model.Bloc;
@@ -14,14 +13,13 @@ import model.MissileAlien;
 import model.MissileTank;
 import model.Tank;
 import model.World;
-import screens.GameScreen;
 import utils.Constants;
 import utils.EActionTank;
 import arbres.Fonctions;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.TimeUtils;
 import com.mygdx.spaceinvaders.MyGdxspaceinvaders;
@@ -686,4 +684,3 @@ public boolean isGameOver()
     
     
 }
-
