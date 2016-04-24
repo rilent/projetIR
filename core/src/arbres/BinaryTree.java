@@ -46,17 +46,17 @@ public class BinaryTree
     	//creation racine <- fonction
     	BinaryTree b = new BinaryTree((new Fonctions(EComparaisonFeatures.values()[nombreAleatoire])));
 
-    	b.ajoutAleatoireNoeud(1, getRoot());
+    	b.ajoutAleatoireNoeud(1, getRoot(), Constants.HAUTEUR_MAX_ARBRE);
     	
     	return b;
     }
     
     
     
-    public void ajoutAleatoireNoeud(int hauteur, Node root)
+    public void ajoutAleatoireNoeud(int hauteur, Node root, int hauteurMaxArbre)
     {
     	//si on a d�pass� la hauteur, on force un noeud ternaire
-    	if(hauteur==Constants.HAUTEUR_MAX_ARBRE)
+    	if(hauteur==hauteurMaxArbre)
     	{
     		//fils gauche
     		int nombreAleatoire = foncRandom(EActionTank.values().length);
@@ -85,7 +85,7 @@ public class BinaryTree
     	    	int nombreAleatoire = foncRandom(EComparaisonFeatures.values().length);
     	    	Node gauche = new Node(new Fonctions(EComparaisonFeatures.values()[nombreAleatoire]));
     	    	this.add(root, gauche, "left");
-    	    	ajoutAleatoireNoeud(hauteur+1, gauche);
+    	    	ajoutAleatoireNoeud(hauteur+1, gauche, hauteurMaxArbre);
 	
     		}
     		
@@ -104,7 +104,7 @@ public class BinaryTree
     	    	int nombreAleatoire = foncRandom(EComparaisonFeatures.values().length);
     	    	Node droit = new Node(new Fonctions(EComparaisonFeatures.values()[nombreAleatoire]));
     	    	this.add(root, droit, "right");
-    	    	ajoutAleatoireNoeud(hauteur+1, droit);	
+    	    	ajoutAleatoireNoeud(hauteur+1, droit, hauteurMaxArbre);	
     		}
 	
     	}

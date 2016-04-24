@@ -81,7 +81,7 @@ public class Constants {
 		public static final int HAUTEUR_MIN_ARBRE = 2;
 		
 		//hauteur maximum d'un arbre
-		public static final int HAUTEUR_MAX_ARBRE = 5;
+		public static final int HAUTEUR_MAX_ARBRE = 5; // faire + 1 pour avoir al vraie hauteur avec le noeud root
 		
 		//nombre de render max (pour affichage d'un nouveau missile)
 		public static final int MAX_RENDER = 40;

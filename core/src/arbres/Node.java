@@ -10,7 +10,7 @@ public class Node implements PrintableNode{
     private Node left;
     private Node right;
    
-    Node (ElementNoeud key) {
+    public Node (ElementNoeud key) {
         this.key = key;
         right = null;
         left = null;
