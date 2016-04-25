@@ -2,6 +2,7 @@ package screens;
 
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.util.ArrayList;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
@@ -47,14 +48,10 @@ public class EndingScreen extends AbstractGameScreen{
             
             Gdx.input.setInputProcessor(stage);
             
-            //tentative de mutation yzer
-    		System.out.println("debut EndingScreen");
-    		
-    		mutation(gam.getPopulation().get(0).getTree());
-        		
-		    //fin mutation
             
-		            
+            //tentative de mutation izer    		
+    		mutation(gam.getPopulation().get(0).getTree());        		
+		    //fin mutation         		            
 		            
 		     // --------- DEBUT CROISEMENT OKLM
 		            
@@ -65,6 +62,12 @@ public class EndingScreen extends AbstractGameScreen{
             croisement(n_a_croiser1, n_a_croiser2);          
             
 		     // ---------- FIN CROISEMENT OKLM
+            
+            
+            // PETIT TOURNOI
+            //tournoi(int nombre_de_node_choisi_au_hasard)
+            Individu gagnant_tournoi = tournoi(3);
+            
 		            
             
             //trouve le meilleur de la génération actuelle
@@ -268,6 +271,45 @@ public class EndingScreen extends AbstractGameScreen{
 				}
 			
 		}
+		
+		public Individu tournoi(int nombre_de_node_choisi_au_hasard) {
+			ArrayList<Individu> pop = gam.getPopulation();
+			ArrayList<Individu> participants_tournoi = new ArrayList<Individu>();
+			Individu gagnant = null ;
+			int nombreAleatoire = -1;
+			//
+			System.out.println("population totale");
+			for (int i = 0; i < pop.size(); i++) {
+				System.out.println(pop.get(i).getTree()+" - "+pop.get(i).getScore());
+			}
+			//
+			for (int i = 0; i < nombre_de_node_choisi_au_hasard; i++) {
+				nombreAleatoire = (int)(Math.random() * (((pop.size()-1) - 0) + 1));
+				System.out.println("nb aleatoire"+ nombreAleatoire);
+				participants_tournoi.add(pop.get(nombreAleatoire));
+				pop.remove(nombreAleatoire);
+			}
+			//
+			System.out.println("participants tournoi("+nombre_de_node_choisi_au_hasard+")");
+			for (int i = 0; i < participants_tournoi.size(); i++) {
+				System.out.println(participants_tournoi.get(i).getTree()+" - "+participants_tournoi.get(i).getScore());
+			}
+			//
+			
+			gagnant = new Individu(participants_tournoi.get(0).getScore(), pop.get(0).getTree());
+			
+			for (int i = 1; i < participants_tournoi.size(); i++) {
+		    	if(participants_tournoi.get(i).getScore() > gagnant.getScore())
+		    	{
+		    		gagnant = participants_tournoi.get(i);
+		    	}				
+			}
+			System.out.println("gagnant : " + gagnant.getTree());
+			System.out.println("son score : " + gagnant.getScore());
+			return gagnant;
+			
+		}
+		
 		
 		public void croisement(Node n1, Node n2){
 			System.out.println("debut croisement");
