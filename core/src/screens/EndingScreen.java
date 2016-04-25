@@ -273,7 +273,11 @@ public class EndingScreen extends AbstractGameScreen{
 		}
 		
 		public Individu tournoi(int nombre_de_node_choisi_au_hasard) {
-			ArrayList<Individu> pop = gam.getPopulation();
+			ArrayList<Individu> pop = new ArrayList<Individu>();
+			for (int i = 0; i < gam.getPopulation().size(); i++) {
+				pop.add(gam.getPopulation().get(i));
+			}
+
 			ArrayList<Individu> participants_tournoi = new ArrayList<Individu>();
 			Individu gagnant = null ;
 			int nombreAleatoire = -1;
@@ -306,7 +310,9 @@ public class EndingScreen extends AbstractGameScreen{
 			}
 			System.out.println("gagnant : " + gagnant.getTree());
 			System.out.println("son score : " + gagnant.getScore());
+			
 			return gagnant;
+			
 			
 		}
 		
