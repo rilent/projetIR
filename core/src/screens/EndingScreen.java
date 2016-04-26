@@ -24,6 +24,7 @@ import arbres.ElementNoeud;
 import arbres.ElementTernaire;
 import arbres.Fonctions;
 import arbres.Node;
+import arbres.TreePrinter;
 import utils.Constants;
 import utils.Individu;
 import utils.EActionTank;
@@ -88,7 +89,9 @@ public class EndingScreen extends AbstractGameScreen{
             
             stage.addActor(table);
             
-
+            final TextButton revoirafond = new TextButton("Revoir le meilleur, a fond", skin);
+            table.add(revoirafond).width(200).height(50);
+            table.row();
             
             if(!gam.isEnModeRalenti() && !gam.isPremiereGeneration()) //si on ne vient pas du mode ralenti
             {
@@ -121,7 +124,26 @@ public class EndingScreen extends AbstractGameScreen{
                 System.out.println("ET CEST LE RALENTI DU MEILLEUR!!");
 				Gdx.graphics.setVSync(true);
 				gam.setEnModeRalenti(true);
-				gam.setIndividuQuonRevoie(leMeilleurDeLaGenEnCours.getTree());
+				//TreePrinter.print(leMeilleurDeLaGenEnCours.getTree());
+				System.out.println("Le score du meilleur est " +leMeilleurDeLaGenEnCours.getScore());
+				
+				gam.setIndividuQuonRevoie(leMeilleurDeLaGenEnCours.getTree().copyNode());
+				gam.setScreen(new GameScreenPourRepetition(gam));
+                }
+           });
+            
+            
+            revoirafond.addListener(new ClickListener(){
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                revoir.addAction(Actions.fadeOut(0.7f));
+                System.out.println("ET CEST LE RALENTI A FOND DU MEILLEUR!!");
+				Gdx.graphics.setVSync(false);
+				gam.setEnModeRalenti(true);
+				//TreePrinter.print(leMeilleurDeLaGenEnCours.getTree());
+				System.out.println("Le score du meilleur est " +leMeilleurDeLaGenEnCours.getScore());
+				
+				gam.setIndividuQuonRevoie(leMeilleurDeLaGenEnCours.getTree().copyNode());
 				gam.setScreen(new GameScreenPourRepetition(gam));
                 }
            });
@@ -189,10 +211,10 @@ public class EndingScreen extends AbstractGameScreen{
 			font.draw(sBatch,  "Les scores obtenus sont : ", 300, 500);
 			for (int i = 0; i < gam.getPopulation().size(); i++) {
 				if(gam.getPopulation().get(i).getScore() < 100)
-					font.draw(sBatch,""+i+" : "+String.valueOf(0),50 + i,600-15*i);
+					font.draw(sBatch,""+i+" : "+String.valueOf(0),50,800-15*i);
 					
 				if(gam.getPopulation().get(i).getScore() >100)
-				font.draw(sBatch,""+i+" : "+String.valueOf(gam.getPopulation().get(i).getScore()).subSequence(0,String.valueOf(gam.getPopulation().get(i).getScore()).length()-2),50 + i,600-15*i);
+				font.draw(sBatch,""+i+" : "+String.valueOf(gam.getPopulation().get(i).getScore()).subSequence(0,String.valueOf(gam.getPopulation().get(i).getScore()).length()-2),50,800-15*i);
 			}
 			sBatch.end();
 			
@@ -478,6 +500,9 @@ public class EndingScreen extends AbstractGameScreen{
 		    	}
 				
 			}
+		    
+		    System.out.println("je suis dans la fonction trouve le meilleur \n");
+		    TreePrinter.print(leMeilleurDeLaGenEnCours.getTree());
 		}
 
 

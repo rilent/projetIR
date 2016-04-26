@@ -61,9 +61,11 @@ public class World {
         	}
         	else
         	{
-        		tree = new BinaryTree(b);
+        		tree = new BinaryTree(b.copyNode());
+        		TreePrinter.print(tree.root);
         	}
-    		//affichage dans les deux modes de l'arbre :
+/*
+        	//affichage dans les deux modes de l'arbre :
     		TreePrinter.print(tree.root);
     		
     		try {
@@ -71,7 +73,7 @@ public class World {
     		} catch (IOException e) {
     			e.printStackTrace();
     		}
-
+*/
         	
             tank = j.getT();
             listeBloc = new ArrayList<Bloc>();

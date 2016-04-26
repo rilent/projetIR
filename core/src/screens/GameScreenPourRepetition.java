@@ -10,6 +10,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.mygdx.spaceinvaders.MyGdxspaceinvaders;
 
 import arbres.BinaryTree;
+import arbres.TreePrinter;
 import controller.WorldControllerMano;
 import model.JoueurAI;
 import model.TankJoueur;
@@ -41,7 +42,9 @@ public class GameScreenPourRepetition extends AbstractGameScreen{
 		}
 		else if(gam.isEnModeRalenti())
 		{
-			world = new World(new JoueurAI(new TankJoueur(new Vector2(Constants.POSITION_DEPART_TANK_X,Constants.POSITION_DEPART_TANK_Y), new Vector2(1,0))),gam.getIndividuQuonRevoie());
+			System.out.println("Je suis dans screen pour repetition \n");
+			TreePrinter.print(gam.getIndividuQuonRevoie());
+			world = new World(new JoueurAI(new TankJoueur(new Vector2(Constants.POSITION_DEPART_TANK_X,Constants.POSITION_DEPART_TANK_Y), new Vector2(1,0))),gam.getIndividuQuonRevoie().copyNode());
 		}
 		else
 		{
@@ -72,6 +75,7 @@ public class GameScreenPourRepetition extends AbstractGameScreen{
 			
 			if(gam.isEnModeRalenti())
 			{
+				System.out.println("apres avoir refait le ralenti, son score est de : "+world.getScorePartie());
 				gam.setScreen(new EndingScreen(gam));
 			}
 			else
