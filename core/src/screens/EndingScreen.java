@@ -50,14 +50,14 @@ public class EndingScreen extends AbstractGameScreen{
             
             
             //tentative de mutation izer    		
-    		mutation(gam.getPopulation().get(0).getTree());        		
+    		mutation(gam.getPopulation().get(0).getTree().copyNode());        		
 		    //fin mutation         		            
 		            
 		     // --------- DEBUT CROISEMENT OKLM
 		            
             System.out.println("debut croisement");
-            Node n_a_croiser1 = gam.getPopulation().get(1).getTree();
-            Node n_a_croiser2 = gam.getPopulation().get(2).getTree();
+            Node n_a_croiser1 = gam.getPopulation().get(1).getTree().copyNode();
+            Node n_a_croiser2 = gam.getPopulation().get(2).getTree().copyNode();
             
             croisement(n_a_croiser1, n_a_croiser2);          
             
@@ -96,7 +96,7 @@ public class EndingScreen extends AbstractGameScreen{
             
             if(!gam.isEnModeRalenti()) //si on ne vient pas du mode ralenti
             {
-            	gam.meilleurDuTournoi(); //on modifie la génération pour la prochaine itération
+            	gam.meilleurDuTournoi(); //on modifie la gï¿½nï¿½ration pour la prochaine itï¿½ration
             }
             
             //on est sure d avoir fait au moins une generation si on arrive ici
@@ -214,7 +214,7 @@ public class EndingScreen extends AbstractGameScreen{
 	            // si noeud est une feuille --> marche mais peut donner le meme machin // a changer
          	if (noeudEstUneAction) {
          		
-         		// si noeud est une action, 2 possibilités
+         		// si noeud est une action, 2 possibilitï¿½s
          		// soit c'est une action ET on est a la hauter max         		
          		if (cpt_ou_est_on>=Constants.HAUTEUR_MAX_ARBRE) {
          		 	System.out.println("Le noeud est une action");
@@ -256,14 +256,14 @@ public class EndingScreen extends AbstractGameScreen{
          		
          	}
 	            		            
-	            System.out.println("Noeud modifié :");
+	            System.out.println("Noeud modifiï¿½ :");
 	            try {
 					noeudEnCours.printTree(new OutputStreamWriter(System.out));
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
 	            
-	            System.out.println("Nouveau noeud muté :");
+	            System.out.println("Nouveau noeud mutï¿½ :");
 	            try {
 					n_a_muter.printTree(new OutputStreamWriter(System.out));
 				} catch (IOException e) {

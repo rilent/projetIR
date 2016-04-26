@@ -22,6 +22,26 @@ public class Node implements PrintableNode{
 		left = n.left;
 	}
 
+    public Node(ElementNoeud key, Node left, Node right) {
+		this.key = key;
+		this.right = right;
+		this.left = left;
+	}
+    
+    public Node copyNode()
+    {
+	    Node left = null;
+	    Node right = null;
+	    if (this.left != null) {
+	        left = this.left.copyNode();
+	    }
+	    if (this.right != null) {
+	        right = this.right.copyNode();
+	    }
+	    return new Node(key,left,right);
+}
+    
+    
 	public void setKey(ElementNoeud key) {
         this.key = key;
     }

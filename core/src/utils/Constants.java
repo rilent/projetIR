@@ -86,6 +86,8 @@ public class Constants {
 		//nombre de render max (pour affichage d'un nouveau missile)
 		public static final int MAX_RENDER = 40;
 		
-		//nombre d'individu que l'on prends pour chaque itération du tournoi
+		//nombre d'individu que l'on prends pour chaque itï¿½ration du tournoi
 		public static final int N_TOURNOI = 3;
+		
+		public static final int NB_INDIVIDU_PAR_GEN = 50;
 }
