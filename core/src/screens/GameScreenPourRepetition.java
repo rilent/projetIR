@@ -88,7 +88,7 @@ public class GameScreenPourRepetition extends AbstractGameScreen{
 	
 				gam.setCalculNbIndividu(gam.getCalculNbIndividu()+1);			
 				
-				if(gam.getCalculNbIndividu() < 5)
+				if(gam.getCalculNbIndividu() < Constants.NB_INDIVIDU_PAR_GEN)
 				{
 					gam.setScreen(new GameScreenPourRepetition(gam));
 				}

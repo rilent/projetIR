@@ -6,6 +6,7 @@ import java.util.Iterator;
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 
 import arbres.Node;
 import screens.GameScreen;
@@ -19,6 +20,7 @@ public class MyGdxspaceinvaders extends Game {
 	private boolean enModeRalenti = false;
 	private int calculNbIndividu = 0; //permets de compter le nombre d'individu par génération
 	private ArrayList<Individu> population = new ArrayList<Individu>();
+	private ArrayList<Individu> prochainePopulation = new ArrayList<Individu>();
 	private boolean premiereGeneration = true;
 	private Node individuQuonRevoie = null;
 	@Override
@@ -46,6 +48,22 @@ public class MyGdxspaceinvaders extends Game {
 		return individuQuonRevoie;
 	}
 
+
+
+
+
+
+	public ArrayList<Individu> getProchainePopulation() {
+		return prochainePopulation;
+	}
+
+
+
+
+
+	public void setProchainePopulation(ArrayList<Individu> prochainePopulation) {
+		this.prochainePopulation = prochainePopulation;
+	}
 
 
 
@@ -112,7 +130,9 @@ public class MyGdxspaceinvaders extends Game {
 	public void setPopulation(ArrayList<Individu> population) {
 		this.population = population;
 	}
-	
+
+
+
 	
 	
 	

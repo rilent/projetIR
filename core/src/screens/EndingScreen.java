@@ -48,7 +48,7 @@ public class EndingScreen extends AbstractGameScreen{
             
             Gdx.input.setInputProcessor(stage);
             
-            
+            /*
             //tentative de mutation izer    		
     		mutation(gam.getPopulation().get(0).getTree().copyNode());        		
 		    //fin mutation         		            
@@ -61,12 +61,13 @@ public class EndingScreen extends AbstractGameScreen{
             
             croisement(n_a_croiser1, n_a_croiser2);          
             
+            */
 		     // ---------- FIN CROISEMENT OKLM
             
             
             // PETIT TOURNOI
             //tournoi(int nombre_de_node_choisi_au_hasard)
-            Individu gagnant_tournoi = tournoi(3);
+            //Individu gagnant_tournoi = tournoi(3);
             
 		            
             
@@ -103,6 +104,16 @@ public class EndingScreen extends AbstractGameScreen{
             gam.setPremiereGeneration(false);
             
             
+            
+            int sommeAnciennePop = 0;
+            for(int i = 0; i <gam.getPopulation().size(); i++)
+            	sommeAnciennePop = sommeAnciennePop + gam.getPopulation().get(i).getScore();
+            
+            int moyenneAnciennePop = sommeAnciennePop / Constants.NB_INDIVIDU_PAR_GEN;
+            System.out.println("population numero "+gam.getCalculNbIterationPopulation() + " : "+ moyenneAnciennePop);
+
+            
+            
             revoir.addListener(new ClickListener(){
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
@@ -124,12 +135,45 @@ public class EndingScreen extends AbstractGameScreen{
                 gam.setEnModeRalenti(false); //on vire le mode ralenti
                 gam.setCalculNbIndividu(0); //on reset le compteur des individus
                 Gdx.graphics.setVSync(false);
+                creationNouvelPop();
+                
+                
+                
+                
+                gam.setPopulation(gam.getProchainePopulation());
 				gam.setScreen(new GameScreenPourRepetition(gam));
                 }
            });
             
 		}	
 
+		
+		public void creationNouvelPop()
+		{
+			//on mets le meilleur en premier
+			gam.getProchainePopulation().add(leMeilleurDeLaGenEnCours);
+			if(Constants.NB_INDIVIDU_PAR_GEN == 50)
+			{
+				//on fait 11 mutation
+				for (int i = 0; i < 11; i++) {
+					Individu gagnant_tournoi = tournoi(3);
+					gam.getProchainePopulation().add(new Individu(-1,gagnant_tournoi.getTree().copyNode()));
+				}
+					//on fait 38 croisements
+				for(int i = 0; i < 19; i++)
+				{
+					Node copy_gagnant_tournoi1 = tournoi(3).getTree().copyNode();
+					Node copy_gagnant_tournoi2 = tournoi(3).getTree().copyNode();
+					
+					
+					croisement(copy_gagnant_tournoi1, copy_gagnant_tournoi2);
+					gam.getProchainePopulation().add(new Individu(-1,copy_gagnant_tournoi1));
+					gam.getProchainePopulation().add(new Individu(-1,copy_gagnant_tournoi2));
+					
+				}
+			}
+			
+		}
 
 		@Override
 		public void render(float deltaTime) {
@@ -145,10 +189,10 @@ public class EndingScreen extends AbstractGameScreen{
 			font.draw(sBatch,  "Les scores obtenus sont : ", 300, 500);
 			for (int i = 0; i < gam.getPopulation().size(); i++) {
 				if(gam.getPopulation().get(i).getScore() < 100)
-					font.draw(sBatch,""+i+" : "+String.valueOf(0),50 + i,400-40*i);
+					font.draw(sBatch,""+i+" : "+String.valueOf(0),50 + i,600-15*i);
 					
 				if(gam.getPopulation().get(i).getScore() >100)
-				font.draw(sBatch,""+i+" : "+String.valueOf(gam.getPopulation().get(i).getScore()).subSequence(0,String.valueOf(gam.getPopulation().get(i).getScore()).length()-2),50 + i,400-40*i);
+				font.draw(sBatch,""+i+" : "+String.valueOf(gam.getPopulation().get(i).getScore()).subSequence(0,String.valueOf(gam.getPopulation().get(i).getScore()).length()-2),50 + i,600-15*i);
 			}
 			sBatch.end();
 			
@@ -426,11 +470,11 @@ public class EndingScreen extends AbstractGameScreen{
 		public void trouveLeMeilleur()
 		{
 		    //on trouve le meilleur individu
-			leMeilleurDeLaGenEnCours = new Individu(gam.getPopulation().get(0).getScore(), gam.getPopulation().get(0).getTree());
+			leMeilleurDeLaGenEnCours = new Individu(gam.getPopulation().get(0).getScore(), gam.getPopulation().get(0).getTree().copyNode());
 		    for (int i = 0; i < gam.getPopulation().size(); i++) {
 		    	if(gam.getPopulation().get(i).getScore() > leMeilleurDeLaGenEnCours.getScore())
 		    	{
-		    		leMeilleurDeLaGenEnCours = new Individu(gam.getPopulation().get(i).getScore(), gam.getPopulation().get(i).getTree());
+		    		leMeilleurDeLaGenEnCours = new Individu(gam.getPopulation().get(i).getScore(), gam.getPopulation().get(i).getTree().copyNode());
 		    	}
 				
 			}
