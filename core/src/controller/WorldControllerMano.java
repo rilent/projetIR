@@ -52,7 +52,8 @@ public class WorldControllerMano extends InputAdapter{
     private void init()
     {
             Gdx.input.setInputProcessor(this);
-            vitesseAlien =0.5f;
+            //vitesseAlien =0.5f;
+            vitesseAlien =1f;
             sauvegardeDescente = Constants.DESCENTE_AVANT_STABILISATION;
             lives = 1;
             lastMissile = TimeUtils.nanoTime();
@@ -99,7 +100,11 @@ public boolean isGameOver()
 	    	EActionTank action = EActionTank.Nothing; // obligé de initialisé
 	    	try {
 				action = world.getTree().decisionTank(world);
-			} catch (IllegalAccessException e) {
+				System.out.print("score: " + world.getScorePartie() + " - render: " +world.getCpt_render() + " - nbrMissile: " +world.getListeMissile().size() + " :: " + action.toString() + "\n");
+				
+	    	
+				
+	    	} catch (IllegalAccessException e) {
 				e.printStackTrace();
 			} catch (IllegalArgumentException e) {
 				e.printStackTrace();
@@ -128,10 +133,11 @@ public boolean isGameOver()
             {
         		//handleInputTank(deltaTime);
             	handleInputTankAutomatisé(action);
-                if(TimeUtils.nanoTime() - gestionVitesseChute > vitesseDuNiveau)
-                {        mouvementAlien();
+                //if(TimeUtils.nanoTime() - gestionVitesseChute > vitesseDuNiveau)
+                //{        
+            			mouvementAlien();
                         gestionVitesseChute = TimeUtils.nanoTime();
-                }
+                //}
             }
             
             // check if we need to create a new raindrop
@@ -408,6 +414,22 @@ public boolean isGameOver()
     
     public void testCollisionMissile()
     {
+    	
+    	if(world.getScorePartie() == 177)
+    	{
+    		System.out.println("on y est");
+    		for (int i = 0; i < world.getListeAlien().size(); i++) {
+				System.out.print(""+ i + ":x: " + world.getListeAlien().get(i).gethitBox().x+":y:" + world.getListeAlien().get(i).gethitBox().y + "###");
+				//System.out.print("rect"+ i + ":x: " + world.getListeAlien().get(i).getPosition().x+":y:" + world.getListeAlien().get(i).getPosition().y + "###");
+			}
+
+    	}
+    	
+    	if(world.getScorePartie() == 1344) //1344
+    	{
+    		System.out.println("on y est");
+
+    	}
     	
     	ArrayList<GameElement> elemASupr = new ArrayList<GameElement>();
 		for(Missile m : world.getListeMissile())

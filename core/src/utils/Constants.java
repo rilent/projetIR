@@ -89,5 +89,5 @@ public class Constants {
 		//nombre d'individu que l'on prends pour chaque it�ration du tournoi
 		public static final int N_TOURNOI = 3;
 		
-		public static final int NB_INDIVIDU_PAR_GEN = 50;
+		public static final int NB_INDIVIDU_PAR_GEN = 10;
 }

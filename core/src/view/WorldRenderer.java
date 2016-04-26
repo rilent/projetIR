@@ -81,6 +81,10 @@ public class WorldRenderer {
 	public void renderGui()
 	{
 		renderScore();
+		int fps = Gdx.graphics.getFramesPerSecond();
+		//System.out.println(fps);
+		font.draw(sBatch,String.valueOf(fps),Constants.VIEWPORT_GUI_HEIGHT-100,Constants.VIEWPORT_GUI_HEIGHT-50);
+		
 	}
 	
 	public void renderScore()

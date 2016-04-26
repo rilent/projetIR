@@ -69,6 +69,7 @@ public class GameScreenPourRepetition extends AbstractGameScreen{
 		world.setCpt_render(world.getCpt_render()+1);
 
 		
+		
 		if(world.isPartieTermine() == true)
 		{
 			

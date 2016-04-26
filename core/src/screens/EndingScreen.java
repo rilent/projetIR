@@ -157,12 +157,12 @@ public class EndingScreen extends AbstractGameScreen{
                 gam.setEnModeRalenti(false); //on vire le mode ralenti
                 gam.setCalculNbIndividu(0); //on reset le compteur des individus
                 Gdx.graphics.setVSync(false);
-                creationNouvelPop();
+                //creationNouvelPop();
                 
                 
                 
                 
-                gam.setPopulation(gam.getProchainePopulation());
+                //gam.setPopulation(gam.getProchainePopulation());
 				gam.setScreen(new GameScreenPourRepetition(gam));
                 }
            });
