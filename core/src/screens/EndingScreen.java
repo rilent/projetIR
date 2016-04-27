@@ -72,7 +72,7 @@ public class EndingScreen extends AbstractGameScreen{
             
 		            
             
-            //trouve le meilleur de la génération actuelle
+            //trouve le meilleur de la gÃ©nÃ©ration actuelle
             trouveLeMeilleur();
             
             
@@ -95,12 +95,12 @@ public class EndingScreen extends AbstractGameScreen{
             
             if(!gam.isEnModeRalenti() && !gam.isPremiereGeneration()) //si on ne vient pas du mode ralenti
             {
-            	gam.setCalculNbIterationPopulation(gam.getCalculNbIterationPopulation() + 1); //alors on tient les comptes dans les générations
+            	gam.setCalculNbIterationPopulation(gam.getCalculNbIterationPopulation() + 1); //alors on tient les comptes dans les gÃ©nÃ©rations
             }
             
             if(!gam.isEnModeRalenti()) //si on ne vient pas du mode ralenti
             {
-            	gam.meilleurDuTournoi(); //on modifie la g�n�ration pour la prochaine it�ration
+            	gam.meilleurDuTournoi(); //on modifie la gï¿½nï¿½ration pour la prochaine itï¿½ration
             }
             
             //on est sure d avoir fait au moins une generation si on arrive ici
@@ -157,13 +157,13 @@ public class EndingScreen extends AbstractGameScreen{
                 gam.setEnModeRalenti(false); //on vire le mode ralenti
                 gam.setCalculNbIndividu(0); //on reset le compteur des individus
                 Gdx.graphics.setVSync(false);
-                //creationNouvelPop();
+                creationNouvelPop();     
                 
+                gam.setPopulation((ArrayList<Individu>) gam.getProchainePopulation().clone());
+				
+                gam.getProchainePopulation().clear();
                 
-                
-                
-                //gam.setPopulation(gam.getProchainePopulation());
-				gam.setScreen(new GameScreenPourRepetition(gam));
+                gam.setScreen(new GameScreenPourRepetition(gam));
                 }
            });
             
@@ -178,8 +178,9 @@ public class EndingScreen extends AbstractGameScreen{
 			{
 				//on fait 11 mutation
 				for (int i = 0; i < 11; i++) {
-					Individu gagnant_tournoi = tournoi(3);
-					gam.getProchainePopulation().add(new Individu(-1,gagnant_tournoi.getTree().copyNode()));
+					Node gagnant_tournoi = tournoi(3).getTree().copyNode();
+					mutation_vraie(gagnant_tournoi);
+					gam.getProchainePopulation().add(new Individu(-1,gagnant_tournoi));
 				}
 					//on fait 38 croisements
 				for(int i = 0; i < 19; i++)
@@ -206,8 +207,8 @@ public class EndingScreen extends AbstractGameScreen{
 			
 			sBatch.begin();
 			
-		    font.draw(sBatch,  "Nous en sommes à la génération numéro : " + gam.getCalculNbIterationPopulation(), 200,650);
-		    font.draw(sBatch,  "Le meilleur score de cette génération est : " + leMeilleurDeLaGenEnCours.getScore(), 200,600);
+		    font.draw(sBatch,  "Nous en sommes Ã  la gÃ©nÃ©ration numÃ©ro : " + gam.getCalculNbIterationPopulation(), 200,650);
+		    font.draw(sBatch,  "Le meilleur score de cette gÃ©nÃ©ration est : " + leMeilleurDeLaGenEnCours.getScore(), 200,600);
 			font.draw(sBatch,  "Les scores obtenus sont : ", 300, 500);
 			for (int i = 0; i < gam.getPopulation().size(); i++) {
 				if(gam.getPopulation().get(i).getScore() < 100)
@@ -223,6 +224,88 @@ public class EndingScreen extends AbstractGameScreen{
 		      stage.act(deltaTime);
 		      stage.draw();
 			
+			
+		}
+		
+		public void mutation_vraie(Node n_a_muter) {
+			
+			 Node noeudEnCours = n_a_muter;
+	           
+          try {
+				noeudEnCours.printTree(new OutputStreamWriter(System.out));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+          
+          //on se place la ou on va rajouter une mutation
+          int cpt_ou_est_on  = 1;
+          int droiteOuGauche = 1;	// 1 pour droite, 0  pour gauche           
+          int continuer = 1;		// 1 si oui , 0 sinon
+          boolean noeudEstUneAction = false;
+          
+          System.out.println("place a la mutation :");
+          
+          //pb : je dois connaitre la hauteur max de l'arbre a muter si je veux m'arreter a temps
+          //pb quand noeud = feuille
+          
+          while(continuer==1)  {
+          	cpt_ou_est_on++;
+          	
+          	droiteOuGauche = (int)(Math.random() * ((1 - 0) + 1));		            	
+          	if (droiteOuGauche==1) {
+          		noeudEnCours = noeudEnCours.getRight();
+          		System.out.println("on va a droite");
+          	}
+          	else {
+          		noeudEnCours = noeudEnCours.getLeft();
+          		System.out.println("on va a gauche");
+          	}       	
+          	
+          	if (!(noeudEnCours.getKey() instanceof Fonctions ) ){
+          		continuer=0;
+          		noeudEstUneAction=true;
+          	}
+          	else        
+          		continuer = (int)(Math.random() * ((1 - 0) + 1)); 
+          	
+          	System.out.println("on s'arrete ou pas ? "+continuer);
+          	try {
+					noeudEnCours.printTree(new OutputStreamWriter(System.out));
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+          	
+          }
+          //System.out.println("hauteur : "+cpt_ou_est_on);
+
+          // si noeud est une feuille --> marche mais peut donner le meme machin // a changer
+       	
+   			//int hauteur_max_de_l_extension = Constants.HAUTEUR_MAX_ARBRE- cpt_ou_est_on;
+			int nombreAleatoire  = BinaryTree.foncRandom(EComparaisonFeatures.values().length);	
+			
+			while (noeudEnCours.getKey().equals(EComparaisonFeatures.values()[nombreAleatoire]))
+			{
+				nombreAleatoire = BinaryTree.foncRandom(EComparaisonFeatures.values().length);
+			}
+			noeudEnCours.setKey(new Fonctions(EComparaisonFeatures.values()[nombreAleatoire]));
+			BinaryTree b1 = new BinaryTree(noeudEnCours);
+			
+			b1.ajoutAleatoireNoeud(1, noeudEnCours, Constants.HAUTEUR_MAX_ARBRE);
+       			 
+       		            
+           System.out.println("Noeud modifi� :");
+           try {
+				noeudEnCours.printTree(new OutputStreamWriter(System.out));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+           
+           System.out.println("Nouveau noeud mut� :");
+           try {
+				n_a_muter.printTree(new OutputStreamWriter(System.out));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 			
 		}
 		
@@ -280,7 +363,7 @@ public class EndingScreen extends AbstractGameScreen{
 	            // si noeud est une feuille --> marche mais peut donner le meme machin // a changer
          	if (noeudEstUneAction) {
          		
-         		// si noeud est une action, 2 possibilit�s
+         		// si noeud est une action, 2 possibilitï¿½s
          		// soit c'est une action ET on est a la hauter max         		
          		if (cpt_ou_est_on>=Constants.HAUTEUR_MAX_ARBRE) {
          		 	System.out.println("Le noeud est une action");
@@ -322,14 +405,14 @@ public class EndingScreen extends AbstractGameScreen{
          		
          	}
 	            		            
-	            System.out.println("Noeud modifi� :");
+	            System.out.println("Noeud modifiï¿½ :");
 	            try {
 					noeudEnCours.printTree(new OutputStreamWriter(System.out));
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
 	            
-	            System.out.println("Nouveau noeud mut� :");
+	            System.out.println("Nouveau noeud mutï¿½ :");
 	            try {
 					n_a_muter.printTree(new OutputStreamWriter(System.out));
 				} catch (IOException e) {

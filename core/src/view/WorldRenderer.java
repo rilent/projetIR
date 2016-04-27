@@ -83,17 +83,17 @@ public class WorldRenderer {
 		renderScore();
 		int fps = Gdx.graphics.getFramesPerSecond();
 		//System.out.println(fps);
-		font.draw(sBatch,String.valueOf(fps),Constants.VIEWPORT_GUI_HEIGHT-100,Constants.VIEWPORT_GUI_HEIGHT-50);
+		font.draw(sBatch,String.valueOf(fps),Constants.VIEWPORT_GUI_HEIGHT-100,Constants.VIEWPORT_GUI_HEIGHT-100);
 		
 	}
 	
 	public void renderScore()
 	{
 		if(world.getScorePartie() < 100)
-			font.draw(sBatch,String.valueOf(0),Constants.VIEWPORT_GUI_HEIGHT-50,Constants.VIEWPORT_GUI_HEIGHT-50);
+			font.draw(sBatch,String.valueOf(0),Constants.VIEWPORT_GUI_HEIGHT-50,Constants.VIEWPORT_GUI_HEIGHT-100);
 			
 		if(world.getScorePartie()>100)
-		font.draw(sBatch,String.valueOf(world.getScorePartie()).subSequence(0,String.valueOf(world.getScorePartie()).length()-2),Constants.VIEWPORT_GUI_HEIGHT-50,Constants.VIEWPORT_GUI_HEIGHT-50);
+		font.draw(sBatch,String.valueOf(world.getScorePartie()).subSequence(0,String.valueOf(world.getScorePartie()).length()-2),Constants.VIEWPORT_GUI_HEIGHT-50,Constants.VIEWPORT_GUI_HEIGHT-100);
 		
 		
 		//font.draw(sBatch,String.valueOf(world.getScorePartie()),Constants.VIEWPORT_GUI_HEIGHT-50,Constants.VIEWPORT_GUI_HEIGHT-50);
