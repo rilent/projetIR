@@ -397,16 +397,16 @@ public boolean isGameOver()
     
     public void replacementTank()
     {
-    	//si en dehors de l ecran � droite
-    	if(world.getTank().getPosition().x > Constants.VIEWPORT_GUI_WIDTH - Constants.TAILLE_TANK)
+    	//si en dehors de l ecran ï¿½ droite
+    	if(world.getTank().getPosition().x > Constants.VIEWPORT_GUI_WIDTH - Constants.TAILLE_TANK*1.5)
     	{
-    		world.getTank().setPosition(new Vector2(Constants.VIEWPORT_GUI_WIDTH - Constants.TAILLE_TANK,world.getTank().getPosition().y));
+    		world.getTank().setPosition(new Vector2((float) (Constants.VIEWPORT_GUI_WIDTH - Constants.TAILLE_TANK*1.5),world.getTank().getPosition().y));
     	}
     	
     	//si en dehors de l ecran a gauche
-    	if(world.getTank().getPosition().x < 0)
+    	if(world.getTank().getPosition().x < 0  + Constants.TAILLE_TANK/2)
     	{
-    		world.getTank().setPosition(new Vector2(0,world.getTank().getPosition().y));
+    		world.getTank().setPosition(new Vector2(0+ Constants.TAILLE_TANK/2,world.getTank().getPosition().y));
     	}
     }
     
@@ -643,6 +643,17 @@ public boolean isGameOver()
                             a.setPosition(new Vector2(x+ecartDeReplacement,y));
                     }
             }
+            
+           
+            if (!(world.getListeAlien().size()==0)) {
+            	for(Alien m : world.getListeAlien())
+            	{
+            		if (m.getPosition().y <=Constants.ORDONNEE_LIMITE_FIN_PARTIE ) {
+            			System.out.println("depassement");
+            			lives = 0;
+            		}
+            	}  
+        	}
             
     }
     

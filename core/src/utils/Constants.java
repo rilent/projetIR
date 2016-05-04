@@ -90,4 +90,8 @@ public class Constants {
 		public static final int N_TOURNOI = 3;
 		
 		public static final int NB_INDIVIDU_PAR_GEN = 50;
+		
+		public static final int ORDONNEE_LIMITE_FIN_PARTIE = 100;
+		
+		
 }
