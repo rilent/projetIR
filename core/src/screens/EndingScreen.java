@@ -119,6 +119,12 @@ public class EndingScreen extends AbstractGameScreen{
             gam.getMoyenneScore().add(moyenneAnciennePop);
             
             
+            if(!(gam.getCalculNbIterationPopulation() < 100))
+            {
+            	for (int i = 0; i < gam.getMoyenneScore().size(); i++) {
+					System.out.println(""+i+ gam.getMoyenneScore().get(i));
+				}
+            }
 
             
             
