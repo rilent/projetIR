@@ -415,21 +415,6 @@ public boolean isGameOver()
     public void testCollisionMissile()
     {
     	
-    	if(world.getScorePartie() == 177)
-    	{
-    		System.out.println("on y est");
-    		for (int i = 0; i < world.getListeAlien().size(); i++) {
-				System.out.print(""+ i + ":x: " + world.getListeAlien().get(i).gethitBox().x+":y:" + world.getListeAlien().get(i).gethitBox().y + "###");
-				//System.out.print("rect"+ i + ":x: " + world.getListeAlien().get(i).getPosition().x+":y:" + world.getListeAlien().get(i).getPosition().y + "###");
-			}
-
-    	}
-    	
-    	if(world.getScorePartie() == 1344) //1344
-    	{
-    		System.out.println("on y est");
-
-    	}
     	
     	ArrayList<GameElement> elemASupr = new ArrayList<GameElement>();
 		for(Missile m : world.getListeMissile())
@@ -649,7 +634,7 @@ public boolean isGameOver()
             	for(Alien m : world.getListeAlien())
             	{
             		if (m.getPosition().y <=Constants.ORDONNEE_LIMITE_FIN_PARTIE ) {
-            			System.out.println("depassement");
+            			//System.out.println("depassement");
             			lives = 0;
             		}
             	}  

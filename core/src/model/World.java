@@ -282,7 +282,7 @@ public class World {
                     e.printStackTrace();
             }
             
-            System.out.println("la derniere ligne est la ligne : " +i);
+            //System.out.println("la derniere ligne est la ligne : " +i);
             return sortie;
         }
        

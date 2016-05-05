@@ -16,7 +16,7 @@ import utils.Individu;
 public class MyGdxspaceinvaders extends Game {
 	
 	private static final String TAG = MyGdxspaceinvaders.class.getName();
-	private int calculNbIterationPopulation = 0; //permets de compter le nombre de génération
+	private static int calculNbIterationPopulation = 0; //permets de compter le nombre de génération
 	private boolean enModeRalenti = false;
 	private int calculNbIndividu = 0; //permets de compter le nombre d'individu par génération
 	private ArrayList<Individu> population = new ArrayList<Individu>();
@@ -24,6 +24,7 @@ public class MyGdxspaceinvaders extends Game {
 	private boolean premiereGeneration = true;
 	private Node individuQuonRevoie = null;
 	private ArrayList<Integer> moyenneScore = new ArrayList<Integer>();
+	private ArrayList<Integer> historiqueDesDestruction = new ArrayList<Integer>();
 	@Override
 	public void create () {
 
@@ -36,8 +37,30 @@ public class MyGdxspaceinvaders extends Game {
 
 	
 	
+	public static int getNumGenEnCours()
+	{
+		return calculNbIterationPopulation;
+	}
 	
-	
+	public ArrayList<Integer> getHistoriqueDesDestruction() {
+		return historiqueDesDestruction;
+	}
+
+
+
+
+
+
+	public void setHistoriqueDesDestruction(
+			ArrayList<Integer> historiqueDesDestruction) {
+		this.historiqueDesDestruction = historiqueDesDestruction;
+	}
+
+
+
+
+
+
 	public ArrayList<Integer> getMoyenneScore() {
 		return moyenneScore;
 	}

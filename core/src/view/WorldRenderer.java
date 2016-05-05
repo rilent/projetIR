@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.mygdx.spaceinvaders.MyGdxspaceinvaders;
 
 import model.Alien;
 import model.Bloc;
@@ -84,6 +85,8 @@ public class WorldRenderer {
 		int fps = Gdx.graphics.getFramesPerSecond();
 		//System.out.println(fps);
 		font.draw(sBatch,String.valueOf(fps),Constants.VIEWPORT_GUI_HEIGHT-100,Constants.VIEWPORT_GUI_HEIGHT-100);
+		
+		font.draw(sBatch,"Generation num : "+String.valueOf(MyGdxspaceinvaders.getNumGenEnCours()),Constants.VIEWPORT_GUI_HEIGHT-700,Constants.VIEWPORT_GUI_HEIGHT-100);
 		
 	}
 	

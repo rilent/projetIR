@@ -37,6 +37,7 @@ public class EndingScreen extends AbstractGameScreen{
 		private BitmapFont font;
 		Skin skin;
 	    Stage stage;
+	    private boolean destruction = false;
 	    
 		public EndingScreen (MyGdxspaceinvaders game) {
 			
@@ -118,12 +119,32 @@ public class EndingScreen extends AbstractGameScreen{
             
             gam.getMoyenneScore().add(moyenneAnciennePop);
             
+            if(gam.getCalculNbIterationPopulation() > 4)
+            {
+	            int valpop = gam.getMoyenneScore().get(gam.getMoyenneScore().size()-1);
+	            int valpopmoins1 = gam.getMoyenneScore().get(gam.getMoyenneScore().size()-2);
+	            int valpopmoins2 = gam.getMoyenneScore().get(gam.getMoyenneScore().size()-3);
+	            
+	            if(valpop < valpopmoins1)
+	            {
+	            	if(valpopmoins1 < valpopmoins2)
+	            	{
+	            		destruction = true;
+	            	}
+	            }
+            }
             
+            
+            //quand on a fait les 100 generations
             if(!(gam.getCalculNbIterationPopulation() < 100))
             {
             	for (int i = 0; i < gam.getMoyenneScore().size(); i++) {
-					System.out.println(""+i+ gam.getMoyenneScore().get(i));
+					System.out.println("score de la gen"+i+ " est : " +gam.getMoyenneScore().get(i));
 				}
+            	for (int i = 0; i < gam.getHistoriqueDesDestruction().size(); i++) {
+					System.out.println("i" + gam.getHistoriqueDesDestruction().get(i));
+				
+            	}
             }
 
             
@@ -181,6 +202,30 @@ public class EndingScreen extends AbstractGameScreen{
 		}	
 
 		
+		
+		
+		public void destructionPopulation() {
+            System.out.println("DESTRUCTION DE MALADE");
+            //garder le meilleur
+            gam.getProchainePopulation().add(leMeilleurDeLaGenEnCours);
+            if(Constants.NB_INDIVIDU_PAR_GEN == 50)
+            {
+                    //on rajoute 49 nouveaux arbres generes aleatoirement
+                    int nombreAleatoire  = -1;
+                    for (int i = 0; i < 50; i++) {
+                            nombreAleatoire = BinaryTree.foncRandom(EComparaisonFeatures.values().length);                                                
+                            Node nouveau_node = new Node(new Fonctions(EComparaisonFeatures.values()[nombreAleatoire]));
+                            BinaryTree b1 = new BinaryTree(nouveau_node);
+                            
+                            b1.ajoutAleatoireNoeud(1, nouveau_node, Constants.HAUTEUR_MAX_ARBRE);
+                            gam.getProchainePopulation().add(new Individu(-1, nouveau_node));
+                    }
+            }
+            
+    }
+		
+		
+		
 		public void creationNouvelPop()
 		{
 			//on mets le meilleur en premier
@@ -219,12 +264,20 @@ public class EndingScreen extends AbstractGameScreen{
 			
             if(gam.getCalculNbIterationPopulation() < 100)
             {
-            
+            	
 	            System.out.println("POPULATION SUIVANTE!!");
 	            gam.setCalculNbIndividu(0); //on reset le compteur des individus
 	            Gdx.graphics.setVSync(false);
-	            creationNouvelPop();     
-	            
+	            if(destruction)
+	            {
+	            	destructionPopulation();
+	            	gam.getHistoriqueDesDestruction().add(gam.getCalculNbIterationPopulation());
+	            }
+	            else
+	            {
+		            creationNouvelPop();     
+	            }
+	            destruction = false;
 	            gam.setPopulation((ArrayList<Individu>) gam.getProchainePopulation().clone());
 				
 	            gam.getProchainePopulation().clear();
