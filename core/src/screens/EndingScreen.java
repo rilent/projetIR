@@ -116,6 +116,11 @@ public class EndingScreen extends AbstractGameScreen{
             System.out.println("population numero "+gam.getCalculNbIterationPopulation() + " : "+ moyenneAnciennePop);
 
             
+            gam.getMoyenneScore().add(moyenneAnciennePop);
+            
+            
+
+            
             
             revoir.addListener(new ClickListener(){
                 @Override
@@ -203,6 +208,31 @@ public class EndingScreen extends AbstractGameScreen{
 
 			Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 			Gdx.gl.glClearColor(0, 0, 0, 0);
+			
+			
+			
+            if(gam.getCalculNbIterationPopulation() < 100)
+            {
+            
+	            System.out.println("POPULATION SUIVANTE!!");
+	            gam.setCalculNbIndividu(0); //on reset le compteur des individus
+	            Gdx.graphics.setVSync(false);
+	            creationNouvelPop();     
+	            
+	            gam.setPopulation((ArrayList<Individu>) gam.getProchainePopulation().clone());
+				
+	            gam.getProchainePopulation().clear();
+	            
+	            gam.setScreen(new GameScreenPourRepetition(gam));
+            }
+            else
+            {
+            	System.out.println("on a fini");
+            }
+            
+			
+			
+			
 			
 			
 			sBatch.begin();
@@ -431,19 +461,19 @@ public class EndingScreen extends AbstractGameScreen{
 			Individu gagnant = null ;
 			int nombreAleatoire = -1;
 			//
-			System.out.println("population totale");
+			//System.out.println("population totale");
 			for (int i = 0; i < pop.size(); i++) {
-				System.out.println(pop.get(i).getTree()+" - "+pop.get(i).getScore());
+				//System.out.println(pop.get(i).getTree()+" - "+pop.get(i).getScore());
 			}
 			//
 			for (int i = 0; i < nombre_de_node_choisi_au_hasard; i++) {
 				nombreAleatoire = (int)(Math.random() * (((pop.size()-1) - 0) + 1));
-				System.out.println("nb aleatoire"+ nombreAleatoire);
+				//System.out.println("nb aleatoire"+ nombreAleatoire);
 				participants_tournoi.add(pop.get(nombreAleatoire));
 				pop.remove(nombreAleatoire);
 			}
 			//
-			System.out.println("participants tournoi("+nombre_de_node_choisi_au_hasard+")");
+			//System.out.println("participants tournoi("+nombre_de_node_choisi_au_hasard+")");
 			for (int i = 0; i < participants_tournoi.size(); i++) {
 				System.out.println(participants_tournoi.get(i).getTree()+" - "+participants_tournoi.get(i).getScore());
 			}
@@ -457,8 +487,8 @@ public class EndingScreen extends AbstractGameScreen{
 		    		gagnant = participants_tournoi.get(i);
 		    	}				
 			}
-			System.out.println("gagnant : " + gagnant.getTree());
-			System.out.println("son score : " + gagnant.getScore());
+			//System.out.println("gagnant : " + gagnant.getTree());
+			//System.out.println("son score : " + gagnant.getScore());
 			
 			return gagnant;
 			
@@ -467,22 +497,22 @@ public class EndingScreen extends AbstractGameScreen{
 		
 		
 		public void croisement(Node n1, Node n2){
-			System.out.println("debut croisement");
+			//System.out.println("debut croisement");
 			Node noeudEnCours1 = n1;
 			int droiteOuGauche = 0;
             int continuer = 1;
             int cpt_ou_est_on2 = 1;
-            System.out.println("parcours noeud 1");
+            //System.out.println("parcours noeud 1");
             while(continuer==1)  {
             	cpt_ou_est_on2++;            	
             	droiteOuGauche = (int)(Math.random() * ((1 - 0) + 1));		            	
             	if (droiteOuGauche==1) {
             		noeudEnCours1 = noeudEnCours1.getRight();
-            		System.out.println("on va a droite");
+            		//System.out.println("on va a droite");
             	}
             	else {
             		noeudEnCours1 = noeudEnCours1.getLeft();
-            		System.out.println("on va a gauche");
+            		//System.out.println("on va a gauche");
             	}       	
             	
             	if (!(noeudEnCours1.getKey() instanceof Fonctions ))
@@ -490,7 +520,7 @@ public class EndingScreen extends AbstractGameScreen{
             	else        
             		continuer = (int)(Math.random() * ((1 - 0) + 1));
             	            	
-            	System.out.println("on s'arrete ou pas ? "+continuer);
+            	//System.out.println("on s'arrete ou pas ? "+continuer);
             	/*
             	try {
 					noeudEnCours1.printTree(new OutputStreamWriter(System.out));
@@ -501,7 +531,7 @@ public class EndingScreen extends AbstractGameScreen{
             	
             }
             
-            System.out.println("parcours noeud 2");
+            //System.out.println("parcours noeud 2");
             Node noeudEnCours2 = n2;
             continuer = 1;
             cpt_ou_est_on2=1;
@@ -510,11 +540,11 @@ public class EndingScreen extends AbstractGameScreen{
             	droiteOuGauche = (int)(Math.random() * ((1 - 0) + 1));		            	
             	if (droiteOuGauche==1) {
             		noeudEnCours2 = noeudEnCours2.getRight();
-            		System.out.println("on va a droite");
+            		//System.out.println("on va a droite");
             	}
             	else {
             		noeudEnCours2 = noeudEnCours2.getLeft();
-            		System.out.println("on va a gauche");
+            		//System.out.println("on va a gauche");
             	}       	
             	
             	if (!(noeudEnCours2.getKey() instanceof Fonctions ))
@@ -522,7 +552,7 @@ public class EndingScreen extends AbstractGameScreen{
             	else        
             		continuer = (int)(Math.random() * ((1 - 0) + 1));
             	            	
-            	System.out.println("on s'arrete ou pas ? "+continuer);
+            	//System.out.println("on s'arrete ou pas ? "+continuer);
             	/*
             	try {
 					noeudEnCours2.printTree(new OutputStreamWriter(System.out));
@@ -584,7 +614,7 @@ public class EndingScreen extends AbstractGameScreen{
 				
 			}
 		    
-		    System.out.println("je suis dans la fonction trouve le meilleur \n");
+		    //System.out.println("je suis dans la fonction trouve le meilleur \n");
 		    TreePrinter.print(leMeilleurDeLaGenEnCours.getTree());
 		}
 

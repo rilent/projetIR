@@ -100,7 +100,7 @@ public boolean isGameOver()
 	    	EActionTank action = EActionTank.Nothing; // obligé de initialisé
 	    	try {
 				action = world.getTree().decisionTank(world);
-				System.out.print("score: " + world.getScorePartie() + " - render: " +world.getCpt_render() + " - nbrMissile: " +world.getListeMissile().size() + " :: " + action.toString() + "\n");
+				//System.out.print("score: " + world.getScorePartie() + " - render: " +world.getCpt_render() + " - nbrMissile: " +world.getListeMissile().size() + " :: " + action.toString() + "\n");
 				
 	    	
 				

@@ -23,6 +23,7 @@ public class MyGdxspaceinvaders extends Game {
 	private ArrayList<Individu> prochainePopulation = new ArrayList<Individu>();
 	private boolean premiereGeneration = true;
 	private Node individuQuonRevoie = null;
+	private ArrayList<Integer> moyenneScore = new ArrayList<Integer>();
 	@Override
 	public void create () {
 
@@ -36,6 +37,25 @@ public class MyGdxspaceinvaders extends Game {
 	
 	
 	
+	
+	public ArrayList<Integer> getMoyenneScore() {
+		return moyenneScore;
+	}
+
+
+
+
+
+
+	public void setMoyenneScore(ArrayList<Integer> moyenneScore) {
+		this.moyenneScore = moyenneScore;
+	}
+
+
+
+
+
+
 	public Node meilleurDuTournoi()
 	{
 		
