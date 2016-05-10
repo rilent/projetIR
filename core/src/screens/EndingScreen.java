@@ -129,7 +129,13 @@ public class EndingScreen extends AbstractGameScreen{
 	            {
 	            	if(valpopmoins1 < valpopmoins2)
 	            	{
-	            		destruction = true;
+	            		if (gam.getNbGenDepuisDerniereDstruction()>5) {
+	            	   		destruction = true;
+	            	   		gam.setNbGenDepuisDerniereDstruction(1);
+	            		}
+	            	   	else {
+		            		gam.augmenteNbGenDepuisDerniereDestruction();
+	            	   	}
 	            	}
 	            }
             }
@@ -140,11 +146,22 @@ public class EndingScreen extends AbstractGameScreen{
             {
             	for (int i = 0; i < gam.getMoyenneScore().size(); i++) {
 					System.out.println("score de la gen"+i+ " est : " +gam.getMoyenneScore().get(i));
-				}
+					//moi
+					if (gam.getMoyenneScore().get(i)>gam.getMeilleureMoyenneScore()) {
+						gam.setMeilleureMoyenneScore(gam.getMoyenneScore().get(i));
+					}
+					else if(gam.getMoyenneScore().get(i)< gam.getMeilleureMoyenneScore()) {
+						gam.setPireMoyenneScore(gam.getMoyenneScore().get(i));
+					}
+            	}
             	for (int i = 0; i < gam.getHistoriqueDesDestruction().size(); i++) {
 					System.out.println("i" + gam.getHistoriqueDesDestruction().get(i));
 				
             	}
+            	
+            	
+            	
+            	
             }
 
             
@@ -264,6 +281,12 @@ public class EndingScreen extends AbstractGameScreen{
 			
             if(gam.getCalculNbIterationPopulation() < 100)
             {
+            	//moi connaitre le meilleur ever
+            	if (leMeilleurDeLaGenEnCours.getScore()>gam.getMeilleurDeTous().getScore()) {
+            		gam.setMeilleurDeTous(leMeilleurDeLaGenEnCours);
+            	}
+            	
+            	
             	
 	            System.out.println("POPULATION SUIVANTE!!");
 	            gam.setCalculNbIndividu(0); //on reset le compteur des individus

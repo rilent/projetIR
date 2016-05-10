@@ -25,6 +25,58 @@ public class MyGdxspaceinvaders extends Game {
 	private Node individuQuonRevoie = null;
 	private ArrayList<Integer> moyenneScore = new ArrayList<Integer>();
 	private ArrayList<Integer> historiqueDesDestruction = new ArrayList<Integer>();
+
+	
+	private int nbGenDepuisDerniereDstruction = 0;
+	
+	public void augmenteNbGenDepuisDerniereDestruction() {
+		this.nbGenDepuisDerniereDstruction++;
+	}
+		
+	//moi
+	private Individu meilleurDeTous = new Individu(-1, null);
+	//moi
+	private int meilleureMoyenneScore = -1;	
+	//moi
+	private int pireMoyenneScore = 99999;	
+	//moi
+	public int getNombreDestructions() {
+		return this.getHistoriqueDesDestruction().size();
+	}
+	
+	public int getNbGenDepuisDerniereDstruction() {
+		return nbGenDepuisDerniereDstruction;
+	}
+	public void setNbGenDepuisDerniereDstruction(int nbGenDepuisDerniereDstruction) {
+		this.nbGenDepuisDerniereDstruction = nbGenDepuisDerniereDstruction;
+	}
+	
+	public int getPireMoyenneScore() {
+		return pireMoyenneScore;
+	}
+
+
+
+	public void setPireMoyenneScore(int pireMoyenneScore) {
+		this.pireMoyenneScore = pireMoyenneScore;
+	}
+
+
+
+	public int getMeilleureMoyenneScore() {
+		return meilleureMoyenneScore;
+	}
+	public void setMeilleureMoyenneScore(int meilleureMoyenneScore) {
+		this.meilleureMoyenneScore = meilleureMoyenneScore;
+	}
+	public Individu getMeilleurDeTous() {
+		return meilleurDeTous;
+	}
+	public void setMeilleurDeTous(Individu meilleurDeTous) {
+		this.meilleurDeTous = meilleurDeTous;
+	}
+
+	
 	@Override
 	public void create () {
 

@@ -100,7 +100,7 @@ public boolean isGameOver()
 	    	EActionTank action = EActionTank.Nothing; // obligé de initialisé
 	    	try {
 				action = world.getTree().decisionTank(world);
-				//System.out.print("score: " + world.getScorePartie() + " - render: " +world.getCpt_render() + " - nbrMissile: " +world.getListeMissile().size() + " :: " + action.toString() + "\n");
+				System.out.print("score: " + world.getScorePartie() + " - render: " +world.getCpt_render() + " - nbrMissile: " +world.getListeMissile().size() + " :: " + action.toString() + "\n");
 				
 	    	
 				
@@ -398,9 +398,9 @@ public boolean isGameOver()
     public void replacementTank()
     {
     	//si en dehors de l ecran ï¿½ droite
-    	if(world.getTank().getPosition().x > Constants.VIEWPORT_GUI_WIDTH - Constants.TAILLE_TANK*1.5)
+    	if(world.getTank().getPosition().x > Constants.VIEWPORT_GUI_WIDTH - Constants.TAILLE_TANK*2)
     	{
-    		world.getTank().setPosition(new Vector2((float) (Constants.VIEWPORT_GUI_WIDTH - Constants.TAILLE_TANK*1.5),world.getTank().getPosition().y));
+    		world.getTank().setPosition(new Vector2((float) (Constants.VIEWPORT_GUI_WIDTH - Constants.TAILLE_TANK*2),world.getTank().getPosition().y));
     	}
     	
     	//si en dehors de l ecran a gauche
@@ -415,6 +415,21 @@ public boolean isGameOver()
     public void testCollisionMissile()
     {
     	
+    	if(world.getScorePartie() == 177)
+    	{
+    		System.out.println("on y est");
+    		for (int i = 0; i < world.getListeAlien().size(); i++) {
+				System.out.print(""+ i + ":x: " + world.getListeAlien().get(i).gethitBox().x+":y:" + world.getListeAlien().get(i).gethitBox().y + "###");
+				//System.out.print("rect"+ i + ":x: " + world.getListeAlien().get(i).getPosition().x+":y:" + world.getListeAlien().get(i).getPosition().y + "###");
+			}
+
+    	}
+    	
+    	if(world.getScorePartie() == 1344) //1344
+    	{
+    		System.out.println("on y est");
+
+    	}
     	
     	ArrayList<GameElement> elemASupr = new ArrayList<GameElement>();
 		for(Missile m : world.getListeMissile())
@@ -634,7 +649,7 @@ public boolean isGameOver()
             	for(Alien m : world.getListeAlien())
             	{
             		if (m.getPosition().y <=Constants.ORDONNEE_LIMITE_FIN_PARTIE ) {
-            			//System.out.println("depassement");
+            			System.out.println("depassement");
             			lives = 0;
             		}
             	}  
