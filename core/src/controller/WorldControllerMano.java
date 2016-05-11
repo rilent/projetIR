@@ -100,7 +100,7 @@ public boolean isGameOver()
 	    	EActionTank action = EActionTank.Nothing; // obligé de initialisé
 	    	try {
 				action = world.getTree().decisionTank(world);
-				System.out.print("score: " + world.getScorePartie() + " - render: " +world.getCpt_render() + " - nbrMissile: " +world.getListeMissile().size() + " :: " + action.toString() + "\n");
+				//System.out.print("score: " + world.getScorePartie() + " - render: " +world.getCpt_render() + " - nbrMissile: " +world.getListeMissile().size() + " :: " + action.toString() + "\n");
 				
 	    	
 				
@@ -417,9 +417,9 @@ public boolean isGameOver()
     	
     	if(world.getScorePartie() == 177)
     	{
-    		System.out.println("on y est");
+    		//System.out.println("on y est");
     		for (int i = 0; i < world.getListeAlien().size(); i++) {
-				System.out.print(""+ i + ":x: " + world.getListeAlien().get(i).gethitBox().x+":y:" + world.getListeAlien().get(i).gethitBox().y + "###");
+				//System.out.print(""+ i + ":x: " + world.getListeAlien().get(i).gethitBox().x+":y:" + world.getListeAlien().get(i).gethitBox().y + "###");
 				//System.out.print("rect"+ i + ":x: " + world.getListeAlien().get(i).getPosition().x+":y:" + world.getListeAlien().get(i).getPosition().y + "###");
 			}
 
@@ -649,7 +649,7 @@ public boolean isGameOver()
             	for(Alien m : world.getListeAlien())
             	{
             		if (m.getPosition().y <=Constants.ORDONNEE_LIMITE_FIN_PARTIE ) {
-            			System.out.println("depassement");
+            			//System.out.println("depassement");
             			lives = 0;
             		}
             	}  
