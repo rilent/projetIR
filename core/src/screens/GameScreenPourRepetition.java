@@ -42,7 +42,7 @@ public class GameScreenPourRepetition extends AbstractGameScreen{
 		}
 		else if(gam.isEnModeRalenti())
 		{
-			System.out.println("Je suis dans screen pour repetition \n");
+			//System.out.println("Je suis dans screen pour repetition \n");
 			TreePrinter.print(gam.getIndividuQuonRevoie());
 			world = new World(new JoueurAI(new TankJoueur(new Vector2(Constants.POSITION_DEPART_TANK_X,Constants.POSITION_DEPART_TANK_Y), new Vector2(1,0))),gam.getIndividuQuonRevoie().copyNode());
 		}
@@ -76,7 +76,7 @@ public class GameScreenPourRepetition extends AbstractGameScreen{
 			
 			if(gam.isEnModeRalenti())
 			{
-				System.out.println("apres avoir refait le ralenti, son score est de : "+world.getScorePartie());
+				//System.out.println("apres avoir refait le ralenti, son score est de : "+world.getScorePartie());
 				gam.setScreen(new EndingScreen(gam));
 			}
 			else

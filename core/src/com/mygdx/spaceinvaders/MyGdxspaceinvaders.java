@@ -27,7 +27,7 @@ public class MyGdxspaceinvaders extends Game {
 	private ArrayList<Integer> historiqueDesDestruction = new ArrayList<Integer>();
 
 	
-	private int nbGenDepuisDerniereDstruction = 0;
+	private int nbGenDepuisDerniereDstruction = 6;
 	
 	public void augmenteNbGenDepuisDerniereDestruction() {
 		this.nbGenDepuisDerniereDstruction++;

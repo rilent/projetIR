@@ -62,7 +62,7 @@ public class World {
         	else
         	{
         		tree = new BinaryTree(b.copyNode());
-        		TreePrinter.print(tree.root);
+        		//TreePrinter.print(tree.root);
         	}
 /*
         	//affichage dans les deux modes de l'arbre :
@@ -205,7 +205,7 @@ public class World {
         public void sauvegarde(String directionDepart, int nombredeLigneAlien, int nombredeColonneAlien, int nombreDeCube, ArrayList<Integer> ordonnancement ) {
             
         	File f = new File("seed_parties.txt");
-            System.out.println("Chemin absolu du fichier : " + f.getAbsolutePath());
+           // System.out.println("Chemin absolu du fichier : " + f.getAbsolutePath());
 
             String caracteristiquesPartie = "" + directionDepart + "-" 
                                                                             + nombredeLigneAlien + "-"

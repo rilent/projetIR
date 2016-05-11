@@ -427,7 +427,7 @@ public boolean isGameOver()
     	
     	if(world.getScorePartie() == 1344) //1344
     	{
-    		System.out.println("on y est");
+    		//System.out.println("on y est");
 
     	}
     	
