@@ -50,27 +50,7 @@ public class EndingScreen extends AbstractGameScreen{
             
             Gdx.input.setInputProcessor(stage);
             
-            /*
-            //tentative de mutation izer    		
-    		mutation(gam.getPopulation().get(0).getTree().copyNode());        		
-		    //fin mutation         		            
-		            
-		     // --------- DEBUT CROISEMENT OKLM
-		            
-            System.out.println("debut croisement");
-            Node n_a_croiser1 = gam.getPopulation().get(1).getTree().copyNode();
-            Node n_a_croiser2 = gam.getPopulation().get(2).getTree().copyNode();
-            
-            croisement(n_a_croiser1, n_a_croiser2);          
-            
-            */
-		     // ---------- FIN CROISEMENT OKLM
-            
-            
-            // PETIT TOURNOI
-            //tournoi(int nombre_de_node_choisi_au_hasard)
-            //Individu gagnant_tournoi = tournoi(3);
-            
+                       
 		            
             
             //trouve le meilleur de la gÃ©nÃ©ration actuelle
@@ -131,7 +111,7 @@ public class EndingScreen extends AbstractGameScreen{
 	            	{
 	            		if (gam.getNbGenDepuisDerniereDstruction()>5) {
 	            	   		destruction = true;
-	            	   		gam.setNbGenDepuisDerniereDstruction(1);
+	            	   		gam.setNbGenDepuisDerniereDstruction(0);
 	            		}
 	            	   	else {
 		            		gam.augmenteNbGenDepuisDerniereDestruction();
@@ -144,14 +124,16 @@ public class EndingScreen extends AbstractGameScreen{
             //quand on a fait les 100 generations
             if(!(gam.getCalculNbIterationPopulation() < 100))
             {
+            	int scoreMax = -1;
+            	int scoreMin = 999999;
             	for (int i = 0; i < gam.getMoyenneScore().size(); i++) {
 					System.out.println("score de la gen"+i+ " est : " +gam.getMoyenneScore().get(i));
 					//moi
-					if (gam.getMoyenneScore().get(i)>gam.getMeilleureMoyenneScore()) {
-						gam.setMeilleureMoyenneScore(gam.getMoyenneScore().get(i));
+					if (gam.getMoyenneScore().get(i)>scoreMax) {
+						scoreMax=gam.getMoyenneScore().get(i);
 					}
-					else if(gam.getMoyenneScore().get(i)< gam.getMeilleureMoyenneScore()) {
-						gam.setPireMoyenneScore(gam.getMoyenneScore().get(i));
+					if(gam.getMoyenneScore().get(i)< scoreMin) {
+						scoreMin = gam.getMoyenneScore().get(i);
 					}
             	}
             	for (int i = 0; i < gam.getHistoriqueDesDestruction().size(); i++) {
@@ -159,13 +141,18 @@ public class EndingScreen extends AbstractGameScreen{
 				
             	}
             	
-            	
+            	System.out.println("Pire score moyen : "+scoreMin);
+            	System.out.println("Meilleur score moyen : "+scoreMax);          	
+            	System.out.println("Nombre de destructions : " + gam.getHistoriqueDesDestruction().size());
+            	System.out.println("Score du meilleur individu : "+leMeilleurDeLaGenEnCours.getScore());
+            	//affichage meilleur arbre
+            	//leMeilleurDeLaGenEnCours.getTree().printTree(new OutputStreamWriter(System.out));
             	
             	
             }
 
             
-            
+           
             revoir.addListener(new ClickListener(){
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
@@ -281,10 +268,7 @@ public class EndingScreen extends AbstractGameScreen{
 			
             if(gam.getCalculNbIterationPopulation() < 100)
             {
-            	//moi connaitre le meilleur ever
-            	if (leMeilleurDeLaGenEnCours.getScore()>gam.getMeilleurDeTous().getScore()) {
-            		gam.setMeilleurDeTous(leMeilleurDeLaGenEnCours);
-            	}
+            	
             	
             	
             	

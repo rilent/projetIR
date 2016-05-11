@@ -33,13 +33,7 @@ public class MyGdxspaceinvaders extends Game {
 		this.nbGenDepuisDerniereDstruction++;
 	}
 		
-	//moi
-	private Individu meilleurDeTous = new Individu(-1, null);
-	//moi
-	private int meilleureMoyenneScore = -1;	
-	//moi
-	private int pireMoyenneScore = 99999;	
-	//moi
+	
 	public int getNombreDestructions() {
 		return this.getHistoriqueDesDestruction().size();
 	}
@@ -51,30 +45,7 @@ public class MyGdxspaceinvaders extends Game {
 		this.nbGenDepuisDerniereDstruction = nbGenDepuisDerniereDstruction;
 	}
 	
-	public int getPireMoyenneScore() {
-		return pireMoyenneScore;
-	}
 
-
-
-	public void setPireMoyenneScore(int pireMoyenneScore) {
-		this.pireMoyenneScore = pireMoyenneScore;
-	}
-
-
-
-	public int getMeilleureMoyenneScore() {
-		return meilleureMoyenneScore;
-	}
-	public void setMeilleureMoyenneScore(int meilleureMoyenneScore) {
-		this.meilleureMoyenneScore = meilleureMoyenneScore;
-	}
-	public Individu getMeilleurDeTous() {
-		return meilleurDeTous;
-	}
-	public void setMeilleurDeTous(Individu meilleurDeTous) {
-		this.meilleurDeTous = meilleurDeTous;
-	}
 
 	
 	@Override
