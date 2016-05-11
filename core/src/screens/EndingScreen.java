@@ -286,7 +286,7 @@ public class EndingScreen extends AbstractGameScreen{
             }
             else
             {
-            	System.out.println("on a fini");
+            	//System.out.println("on a fini");
             }
             
 			
