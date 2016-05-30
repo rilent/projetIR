@@ -231,7 +231,7 @@ public boolean isGameOver()
     //g�re le tire des aliens
     private void gestionTirMissileDesAliens()
     {
-
+    	if (world.getListeAlien().size()!=0 ) {
     		Alien a1 = trouveAlienEnBoutDeFil(world.getOrdonnancementDeQuiTire().get(indiceDesColonnesQuiTire.get(0)));
     		Alien a2 = trouveAlienEnBoutDeFil(world.getOrdonnancementDeQuiTire().get(indiceDesColonnesQuiTire.get(1)));
     		
@@ -255,6 +255,7 @@ public boolean isGameOver()
     		}
     		
     		lastMissile = TimeUtils.nanoTime();
+    	}
     		
     	}
 
